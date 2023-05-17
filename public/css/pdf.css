@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+/* // */
+@page{
+    margin: 0cm 0cm;
+}
+body{
+    font-family: 'Poppins',sans-serif;
+}
+.title{
+    color: white;
+    display: block;
+    text-align: center;
+    background: #5556A6;
+}
+.info{
+    margin-bottom: 40px;
+}
+.info td{
+    width: 50%;
+    padding: 8px 0px;
+}
+.info .name{
+    text-align: left;
+}
+.info .date{
+    text-align: right;
+}
+.info span{
+    color: #5556A6;
+    font-weight: 600;
+}
+.factura{
+    text-align: center;
+    border-spacing: 3px;
+    border: 1px solid black;
+}
+.factura,.info{
+    width: 100%;
+    vertical-align: middle;
+    border-collapse: collapse;
+}
+.factura tr:nth-child(odd){
+    background-color: #ddd;
+}
+.factura th{
+    padding: 10px 8px;
+    color: white;
+    background: #5556A6;
+}
+hr{
+    margin-top: 40px;
+    color: #5556A6;
+    border-radius: 6px;
+    background-color: #5556A6;
+}
+.total{
+    text-align: right;
+    padding-right: 15px;
+}
+.total p{
+    font-size: 22px;
+}
+.total span{
+    color: #5556A6;
+    font-weight: 600;
+}

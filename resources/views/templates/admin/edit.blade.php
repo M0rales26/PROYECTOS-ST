@@ -1,0 +1,38 @@
+@extends('layouts.menu')
+@section('title', 'Editar Nombre Producto' )
+
+@section('content')
+    <div class="flex flex-col items-center justify-center text-center w-full h-screen flex-1 px-20">
+        <div class="bg-gray-200 rounded-2xl shadow-xl w-[150%] sm:w-[100%] lg:w-[60%]">
+            <div class="w-full p-5">
+                <div class="my-4">
+                    <h2 class="text-3xl font-bold text-primary mb-1">Editar Nombre Producto</h2>
+                    <div class="border-2 w-10 border-primary inline-block mb-2"></div>
+                </div>
+                <form action="{{url('nombres/'.$nombre->id_nombrep)}}" method="POST" class="form_edit">
+                    @csrf
+                    {{method_field('PATCH')}}
+                    <div class="flex flex-col items-center gap-4">
+                        <div class="w-full sm:w-[80%] bg-gray-100 border-2 border-primary flex items-center rounded-xl">
+                            <img src="{{ asset('iconos/cookie.svg') }}" class="ml-4">
+                            <input type="text" name="nombre" class="outline-none px-3 py-2 w-full bg-transparent placeholder:text-black" value="{{ $nombre->nombre }}" autocomplete="off">
+                        </div>
+                    </div>
+                    {{-- // --}}
+                    @error('nombre')
+                        <p class="text-sm text-red-600 font-semibold mt-1">{{ $message }}</p>
+                    @enderror
+                    {{-- // --}}
+                    <div class="flex gap-5 w-full items-center justify-center">
+                        <button type="submit" class="mt-6 text-white rounded-full px-7 sm:px-12 py-2 font-semibold bg-check hover:scale-105 duration-300 flex items-center justify-center">
+                            <img src="{{ asset('iconos/check.svg') }}" class="nav mr-1"> Confirmar
+                        </button>
+                        <a href="{{route('nombres.index')}}" class="mt-6 text-white rounded-full px-7 sm:px-12 py-2 font-semibold bg-gray-500 hover:scale-105 duration-300 cursor-pointer flex items-center justify-center">
+                            <img src="{{ asset('iconos/x.svg') }}" class="nav mr-1"> Cancelar
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endsection
