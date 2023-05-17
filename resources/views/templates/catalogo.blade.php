@@ -33,11 +33,6 @@
                                 <img src="{{ asset('iconos/edit.svg') }}" class="nav"> Editar
                             </button>
                         </form>
-                        <form action="" method="POST" class="form_delete">
-                            <button class="bg-check text-white font-semibold px-7 sm:px-5 py-2 rounded-lg text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300">
-                                <img src="{{ asset('iconos/trash.svg') }}" class="nav"> Habilitar
-                            </button>
-                        </form>
                     </div>
                 </div>
             @endforeach

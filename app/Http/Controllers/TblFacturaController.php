@@ -77,9 +77,11 @@ class TblFacturaController extends Controller{
                     'estado' => 'PENDIENTE',
                 ];
                 DB::table('tbl_factura_producto')->insert($datasave);
+                return redirect()->back()->with('success', 'La compra se registró con exito!');
             } else {
                 return redirect()->back()->with('error', 'No hay suficiente cantidad de producto disponible.');
             }
+            //      //
             if($producto->stock == '0'){
                 $producto->update(['estado' => 'DESHABILITADO' ]);
             }
