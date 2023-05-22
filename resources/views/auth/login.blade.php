@@ -33,7 +33,7 @@
                                 @enderror
                             </div>
                             <div class="flex items-center justify-end mt-3 mb-2 w-[75%]">
-                                <a href="{{route('contraseña.index')}}" class="text-primary hover:underline duration-300">
+                                <a href="{{route('password.request')}}" class="text-primary hover:underline duration-300">
                                     ¿Olvidaste tu contraseña?
                                 </a>
                             </div>

@@ -137,3 +137,11 @@ Route::get('/logout',[LoginController::class, 'destroy'])
     ->middleware('auth')
     ->name('login.destroy');
 //----------------------------------------------------------//
+// Auth::routes();
+Route::get('password/reset', 'App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+// Enviar correo electrónico con el enlace de restablecimiento de contraseña
+Route::post('password/email', 'App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+// Mostrar formulario para restablecer la contraseña
+Route::get('password/reset/{token}', 'App\Http\Controllers\Auth\ResetPasswordController@showResetForm')->name('password.reset');
+// Actualizar la contraseña
+Route::post('password/reset', 'App\Http\Controllers\Auth\ResetPasswordController@reset')->name('password.update');
