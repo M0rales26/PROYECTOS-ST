@@ -45,6 +45,9 @@
                         @error('peso_neto')
                             <p class="text-sm text-red-600 font-semibold mt-1">{{ $message }}</p>
                         @enderror
+                        @error('stock')
+                            <p class="text-sm text-red-600 font-semibold mt-1">{{ $message }}</p>
+                        @enderror
                         @error('foto')
                             <p class="text-sm text-red-600 font-semibold mt-1">{{ $message }}</p>
                         @enderror
