@@ -82,7 +82,7 @@ class TblFacturaController extends Controller{
                 return redirect()->back()->with('error', 'No hay suficiente cantidad de producto disponible.');
             }
             if($producto->stock == '0'){
-                $producto->update(['estado' => 'DESHABILITADO' ]);
+                $producto->update(['estado' => 'DESHABILITADO']);
             }
         }
         return redirect()->back();

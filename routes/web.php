@@ -4,7 +4,6 @@ use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\ComparacionController;
-use App\Http\Controllers\ContraseñaController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TiendaController;
 use App\Http\Controllers\TblUSuarioController;
@@ -31,13 +30,6 @@ Route::get('/login',[LoginController::class, 'create'])
     ->name('login.index');
 Route::post('/login',[LoginController::class, 'store'])
     ->name('login.store');
-//-----------------------------------------------------------//
-Route::get('/password/reset', [ContraseñaController::class, 'create'])
-    ->middleware('guest')
-    ->name('contraseña.index');
-Route::post('/password/reset', [ContraseñaController::class, 'resetPassword'])
-    ->middleware('guest')
-    ->name('contraseña.update');
 //-----------------------------------------------------------//
 Route::get('/registro',[TblUsuarioController::class, 'create'])
     ->middleware('guest')
@@ -138,10 +130,14 @@ Route::get('/logout',[LoginController::class, 'destroy'])
     ->name('login.destroy');
 //----------------------------------------------------------//
 // Auth::routes();
-Route::get('password/reset', 'App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::get('password/reset', 'App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm')
+    ->name('password.request');
 // Enviar correo electrónico con el enlace de restablecimiento de contraseña
-Route::post('password/email', 'App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::post('password/email', 'App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail')
+    ->name('password.email');
 // Mostrar formulario para restablecer la contraseña
-Route::get('password/reset/{token}', 'App\Http\Controllers\Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::get('password/reset/{token}', 'App\Http\Controllers\Auth\ResetPasswordController@showResetForm')
+    ->name('password.reset');
 // Actualizar la contraseña
-Route::post('password/reset', 'App\Http\Controllers\Auth\ResetPasswordController@reset')->name('password.update');
+Route::post('password/reset', 'App\Http\Controllers\Auth\ResetPasswordController@reset')
+    ->name('password.update');
