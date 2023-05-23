@@ -19,14 +19,10 @@ class ResetPasswordController extends Controller{
     | explore this trait and override any methods you wish to tweak.
     |
     */
-
-
     use ResetsPasswords;
-
     /**
      * Where to redirect users after resetting their password.
      *return redirect('/login');
-
      * @var string
      */
     protected $redirectTo = '/login';
@@ -53,14 +49,13 @@ class ResetPasswordController extends Controller{
             'password' => 'required|confirmed|min:8|max:16',
             'password_confirmation' => 'required',
         ], $messages);
-
         $response = $this->broker()->reset(
             $this->credentials($request),
             function ($user, $password) {
                 $this->resetPassword($user, $password);
             }
         );
-
+        //      //
         if ($response == Password::PASSWORD_RESET) {
             return redirect($this->redirectPath())
             ->with('status', trans($response));

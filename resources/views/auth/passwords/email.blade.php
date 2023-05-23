@@ -29,7 +29,7 @@
                         </div>
                         <div class="">
                             @if (session('status'))
-                                <p class="text-md text-green-600 font-semibold mt-3">{{ session('status') }}</p>
+                                <p class="text-sm text-green-600 font-semibold mt-3">{{ session('status') }}</p>
                             @endif
                         </div>
                         {{-- // --}}
