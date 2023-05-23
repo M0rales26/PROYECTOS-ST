@@ -27,15 +27,10 @@
                             <a href="{{route('change.status',$prd->id_producto)}}" class="text-red-500">DESHABILITADO</a>
                         @endif
                     </div>
-                    <div class="flex justify-center gap-2 sm:gap-3 lg:gap-4 w-full sm:w-auto">
+                    <div class="flex justify-center w-full">
                         <form action="{{url('/producto/'.$prd->id_producto.'/edit/')}}">
-                            <button type="submit" class="bg-primary text-white font-semibold px-7 sm:px-5 py-2 rounded-lg text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300">
+                            <button type="submit" class="bg-primary text-white font-semibold px-20 sm:px-8 lg:px-12 py-2 rounded-lg text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300">
                                 <img src="{{ asset('iconos/edit.svg') }}" class="nav"> Editar
-                            </button>
-                        </form>
-                        <form action="" method="POST" class="form_delete">
-                            <button class="bg-check text-white font-semibold px-7 sm:px-5 py-2 rounded-lg text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300">
-                                <img src="{{ asset('iconos/trash.svg') }}" class="nav"> Habilitar
                             </button>
                         </form>
                     </div>

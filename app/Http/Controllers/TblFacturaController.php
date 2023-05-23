@@ -47,45 +47,88 @@ class TblFacturaController extends Controller{
     }
     //      //
     public function store(Request $request){
-        $facturaCreada = false;
+        // $facturaCreada = false;
+        // $id_producto = $request->id;
+        // $total_prod  = $request->total_prod;
+        // $cantidad    = $request->cantidad;
+        // $id_tendero  = $request->id_tendero;
+        // //      //
+        // for ($i = 0; $i < count($id_producto); $i++) {
+        //     $producto = tbl_producto::findOrFail($id_producto[$i]);
+        //     $cantidad_vendida = $cantidad[$i];
+        //     // Verificar si hay suficiente stock disponible
+        //     if ($producto->stock >= $cantidad_vendida) {
+        //         // Restar la cantidad vendida del stock del producto
+        //         $producto->update(['stock' => $producto->stock - $cantidad_vendida]);
+        //         // Crear la factura solo una vez
+        //         if (!$facturaCreada) {
+        //             $factura = request()->except('id', 'total_prod', 'cantidad', 'id_tendero', '_token');
+        //             Tbl_Factura::create($factura);
+        //             $facturaCreada = true;
+        //             // Guardar los detalles de la factura
+        //             if($producto->stock == '0'){
+        //                 $producto->update(['estado' => 'DESHABILITADO']);
+        //             }
+        //         }
+        //         $id_factura = tbl_Factura::max('id_factura');
+        //         $datasave = [
+        //             'producto_id' => $id_producto[$i],
+        //             'total_producto' => $total_prod[$i],
+        //             'cantidad' => $cantidad_vendida,
+        //             'factura_id' => $id_factura,
+        //             'tendero_id' => $id_tendero[$i],
+        //             'estado' => 'PENDIENTE',
+        //         ];
+        //         DB::table('tbl_factura_producto')->insert($datasave);
+        //         return redirect()->back()->with('success', 'La compra se registró con exito!');
+        //     } else {
+        //         return redirect()->back()->with('error', 'No hay suficiente cantidad de producto disponible.');
+        //     }
+        // }
+        // return redirect()->back();
         $id_producto = $request->id;
         $total_prod  = $request->total_prod;
         $cantidad    = $request->cantidad;
         $id_tendero  = $request->id_tendero;
-        //      //
+        $excedeStock = false;
+        // Verificar si se excede el stock
         for ($i = 0; $i < count($id_producto); $i++) {
             $producto = tbl_producto::findOrFail($id_producto[$i]);
             $cantidad_vendida = $cantidad[$i];
-            // Verificar si hay suficiente stock disponible
-            if ($producto->stock >= $cantidad_vendida) {
-                // Restar la cantidad vendida del stock del producto
-                $producto->update(['stock' => $producto->stock - $cantidad_vendida]);
-                // Crear la factura solo una vez
-                if (!$facturaCreada) {
-                    $factura = request()->except('id', 'total_prod', 'cantidad', 'id_tendero', '_token');
-                    Tbl_Factura::create($factura);
-                    $facturaCreada = true;
-                    // Guardar los detalles de la factura
-                }
-                $id_factura = tbl_Factura::max('id_factura');
-                $datasave = [
-                    'producto_id' => $id_producto[$i],
-                    'total_producto' => $total_prod[$i],
-                    'cantidad' => $cantidad_vendida,
-                    'factura_id' => $id_factura,
-                    'tendero_id' => $id_tendero[$i],
-                    'estado' => 'PENDIENTE',
-                ];
-                DB::table('tbl_factura_producto')->insert($datasave);
-                return redirect()->back()->with('success', 'La compra se registró con exito!');
-            } else {
-                return redirect()->back()->with('error', 'No hay suficiente cantidad de producto disponible.');
+            if ($cantidad_vendida > $producto->stock) {
+                $excedeStock = true;
+                break;
             }
-            if($producto->stock == '0'){
+        }
+        if ($excedeStock) {
+            return redirect()->back()->with('error', 'La cantidad solicitada excede el stock disponible para algunos productos.');
+        }
+        // Restar el stock y deshabilitar productos si no se excede el stock
+        for ($i = 0; $i < count($id_producto); $i++) {
+            $producto = tbl_producto::findOrFail($id_producto[$i]);
+            $cantidad_vendida = $cantidad[$i];
+            $producto->update(['stock' => $producto->stock - $cantidad_vendida]);
+            if ($producto->stock == 0) {
                 $producto->update(['estado' => 'DESHABILITADO']);
             }
         }
-        return redirect()->back();
+        // Crear la factura
+        $factura = request()->except('id', 'total_prod', 'cantidad', 'id_tendero', '_token');
+        $createdFactura = Tbl_Factura::create($factura);
+        $id_factura = $createdFactura->id_factura;
+        // Guardar los detalles de la factura
+        for ($i = 0; $i < count($id_producto); $i++) {
+            $datasave = [
+                'producto_id' => $id_producto[$i],
+                'total_producto' => $total_prod[$i],
+                'cantidad' => $cantidad_vendida,
+                'factura_id' => $id_factura,
+                'tendero_id' => $id_tendero[$i],
+                'estado' => 'PENDIENTE',
+            ];
+            DB::table('tbl_factura_producto')->insert($datasave);
+        }
+        return redirect()->back()->with('success', 'La compra se registró con éxito!');
     }
     //      //
     public function pdf(){

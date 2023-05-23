@@ -97,13 +97,13 @@ class TblProductoController extends Controller{
             ],
             'stock' => [
                 'numeric' => 'En el campo "Stock Producto" solo se permite ingresar números.',
-                'not_negative' => 'No sé permite el ingreso de valores negativos.',
+                'greater_than_zero' => 'La cantidad de stock debe ser mayor que 0.',
             ],
         ];
         $request->validate([
             'nombrep' => 'max:40',
             'precio' => 'numeric|not_negative',
-            'stock' => 'numeric|not_negative',
+            'stock' => 'numeric|greater_than_zero',
         ],$messages);
         //      //
         $datoscatalogo = request()->except(['_token', '_method']);

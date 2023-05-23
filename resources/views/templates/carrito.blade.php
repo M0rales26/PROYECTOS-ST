@@ -58,7 +58,7 @@
                         </div>
                         <div class="text-center">
                             <p>{{$prd->name}}</p>
-                            <p>{{$prd->price}}</p>
+                            <p>${{$prd->price}}</p>
                             <p>{{$prd->attributes->descripcion}}</p>
                             <p class="font-bold text-red-600">Cantidad: {{$prd->quantity}}</p>
                         </div>
