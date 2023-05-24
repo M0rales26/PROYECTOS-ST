@@ -18,7 +18,7 @@
                 @foreach ($facturas as $fact)
                     <div class="bg-gray-200 p-6 rounded-lg shadow-xl w-full h-64 flex items-center justify-between flex-col">
                         <div class="w-full text-center text-xl">
-                            <p class="font-bold uppercase text-primary">Compra N° {{ $loop->iteration }}</p>
+                            <p class="font-bold uppercase text-primary">Compra N° {{ ($facturas->currentPage() - 1) * $facturas->perPage() + $loop->index + 1 }}</p>
                         </div>
                         <div class="w-full flex flex-col text-center gap-3">
                             <p class="flex flex-col">
