@@ -10,7 +10,7 @@ class ComparacionController extends Controller{
     public function comparar(Request $request){
         $boton = trim($request->get('boton'));
         $producto = DB::table('tbl_producto')
-                    ->select('id_producto','nombrep','precio','peso_neto','foto','estado','tbl_usuario.name')
+                    ->select('id_producto','nombrep','precio','peso_neto','foto','estado','stock','tbl_usuario.name')
                     ->join('tbl_usuario','tbl_producto.usuario_id','=','tbl_usuario.id_usuario')
                     ->where('nombrep','LIKE','%'.$boton.'%')
                     ->where('estado','HABILITADO')

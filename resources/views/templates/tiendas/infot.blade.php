@@ -26,6 +26,7 @@
                         <p>{{$prd->nombrep}}</p>
                         <p>${{$prd->precio}}</p>
                         <p>{{$prd->peso_neto}}</p>
+                        <p class="font-bold text-sky-600">Disponibles: {{$prd->stock}}</p>
                     </div>
                     <div class="flex flex-col gap-2 mt-4 w-[95%] sm:w-full">
                         <form action="{{route('cart.store')}}" method="POST">

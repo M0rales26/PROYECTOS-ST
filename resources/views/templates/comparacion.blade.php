@@ -10,10 +10,11 @@
                         <img src="/imgprod/{{$com->foto}}" class="w-52 h-52 border-2 border-primary rounded-lg bg-white">
                     </div>
                     <div class="w-full text-center font-medium">
+                        <p class="font-semibold text-primary">{{$com->name}}</p>
                         <p class="text-md">{{$com->nombrep}}</p>
                         <p>${{$com->precio}}</p>
                         <p>{{$com->peso_neto}}</p>
-                        <p class="font-semibold text-primary">{{$com->name}}</p>
+                        <p class="font-bold text-sky-600">Disponibles: {{$com->stock}}</p>
                     </div>
                     <div class="flex flex-col gap-2 mt-4 w-[95%]">
                         <form action="{{route('cart.store')}}" method="POST">

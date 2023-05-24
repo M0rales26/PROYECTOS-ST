@@ -22,7 +22,7 @@ class TiendaController extends Controller{
     public function info($id){
         $user['tendero'] = User::where('id_usuario', $id)->get();
         $datos['producto']=DB::table('tbl_producto')
-            ->select('id_producto','nombrep','precio','peso_neto','foto','estado')
+            ->select('id_producto','nombrep','precio','peso_neto','foto','estado','stock')
             ->where('estado','HABILITADO')
             ->where('usuario_id',$id)->get();
         return view('templates.tiendas.infot', $datos, $user);

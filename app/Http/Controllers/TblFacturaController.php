@@ -47,45 +47,6 @@ class TblFacturaController extends Controller{
     }
     //      //
     public function store(Request $request){
-        // $facturaCreada = false;
-        // $id_producto = $request->id;
-        // $total_prod  = $request->total_prod;
-        // $cantidad    = $request->cantidad;
-        // $id_tendero  = $request->id_tendero;
-        // //      //
-        // for ($i = 0; $i < count($id_producto); $i++) {
-        //     $producto = tbl_producto::findOrFail($id_producto[$i]);
-        //     $cantidad_vendida = $cantidad[$i];
-        //     // Verificar si hay suficiente stock disponible
-        //     if ($producto->stock >= $cantidad_vendida) {
-        //         // Restar la cantidad vendida del stock del producto
-        //         $producto->update(['stock' => $producto->stock - $cantidad_vendida]);
-        //         // Crear la factura solo una vez
-        //         if (!$facturaCreada) {
-        //             $factura = request()->except('id', 'total_prod', 'cantidad', 'id_tendero', '_token');
-        //             Tbl_Factura::create($factura);
-        //             $facturaCreada = true;
-        //             // Guardar los detalles de la factura
-        //             if($producto->stock == '0'){
-        //                 $producto->update(['estado' => 'DESHABILITADO']);
-        //             }
-        //         }
-        //         $id_factura = tbl_Factura::max('id_factura');
-        //         $datasave = [
-        //             'producto_id' => $id_producto[$i],
-        //             'total_producto' => $total_prod[$i],
-        //             'cantidad' => $cantidad_vendida,
-        //             'factura_id' => $id_factura,
-        //             'tendero_id' => $id_tendero[$i],
-        //             'estado' => 'PENDIENTE',
-        //         ];
-        //         DB::table('tbl_factura_producto')->insert($datasave);
-        //         return redirect()->back()->with('success', 'La compra se registró con exito!');
-        //     } else {
-        //         return redirect()->back()->with('error', 'No hay suficiente cantidad de producto disponible.');
-        //     }
-        // }
-        // return redirect()->back();
         $id_producto = $request->id;
         $total_prod  = $request->total_prod;
         $cantidad    = $request->cantidad;
