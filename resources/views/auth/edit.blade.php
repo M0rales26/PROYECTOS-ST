@@ -3,8 +3,8 @@
 
 @section('content')
     <div class="flex flex-col items-center justify-center text-center w-full h-screen flex-1 px-20">
-        <div class="bg-gray-200 rounded-2xl shadow-xl w-[150%] sm:w-[100%] lg:w-[60%]">
-            <div class="w-full p-5">
+        <div class="bg-gray-200 rounded-2xl shadow-xl w-[160%] sm:w-[100%] lg:w-[60%]">
+            <div class="h-full p-5">
                 <div class="my-4">
                     <h2 class="text-3xl font-bold text-primary mb-1">Editar Datos</h2>
                     <div class="border-2 w-10 border-primary inline-block mb-2"></div>

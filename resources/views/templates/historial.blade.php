@@ -43,5 +43,7 @@
         </div>
     @endif
     {{-- // --}}
-    {{$facturas->links("pagination::my-pagination")}}
+    <div class="flex w-full items-center justify-center">
+        {{$facturas->links("pagination::my-pagination")}}
+    </div>
 @endsection

@@ -19,10 +19,11 @@
                         <img src="{{ url('imgprod/' . $prd->foto)}}" class="w-52 h-52 border-2 border-primary rounded-lg bg-white">
                     </div>
                     <div class="w-full text-center font-medium">
+                        <p class="font-semibold text-primary">{{$prd->name}}</p>
                         <p class="text-md">{{$prd->nombrep}}</p>
                         <p>${{$prd->precio}}</p>
                         <p>{{$prd->peso_neto}}</p>
-                        <p class="font-semibold text-primary">{{$prd->name}}</p>
+                        <p class="font-bold text-cyan-600">Disponibles: {{$prd->stock}}</p>
                     </div>
                     <div class="flex flex-col gap-2 mt-4 w-[95%] sm:w-full">
                         <form action="{{route('cart.store')}}" method="POST">
