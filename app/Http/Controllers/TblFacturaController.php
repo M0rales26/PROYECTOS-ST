@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use \App\Events\FacturasCompletadas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -9,8 +10,12 @@ use App\Models\Tbl_Factura;
 use App\Models\Tbl_Factura_Producto;
 use App\Models\Tbl_Producto;
 use Barryvdh\DomPDF\Facade\PDF;
+use App\Notifications\ProductosSinStockNotification;
+use App\Models\User;
+use App\Notifications\FacturaPendienteNotification;
 
 class TblFacturaController extends Controller{
+#region historial
     public function historial(){
         $usuario = Auth::user()->id_usuario;
         //      //
@@ -27,7 +32,11 @@ class TblFacturaController extends Controller{
             return view('templates.historial', compact('facturas','usuario'));
         }
     }
-    //      //
+
+#endregion
+    
+
+#region pddfhistorial
     public function pdfhistorial($id){
         $factura = DB::table('tbl_factura')
             ->select('id_factura','total','tbl_factura.created_at')
@@ -45,13 +54,19 @@ class TblFacturaController extends Controller{
         $pdf = PDF::loadview('templates.pdf.facturac',['factura'=>$factura,'factura_producto'=>$factura_producto]);
         return $pdf->stream();
     }
-    //      //
+#endregion
+    
+
+#region store
     public function store(Request $request){
         $id_producto = $request->id;
         $total_prod  = $request->total_prod;
         $cantidad    = $request->cantidad;
         $id_tendero  = $request->id_tendero;
         $excedeStock = false;
+        $productosSinStockPorVendedor = [];
+        $vendedoresFacturaPendiente=[];
+
         // Verificar si se excede el stock
         for ($i = 0; $i < count($id_producto); $i++) {
             $producto = tbl_producto::findOrFail($id_producto[$i]);
@@ -64,6 +79,7 @@ class TblFacturaController extends Controller{
         if ($excedeStock) {
             return redirect()->back()->with('error', 'La cantidad solicitada excede el stock disponible para algunos productos.');
         }
+
         // Restar el stock y deshabilitar productos si no se excede el stock
         for ($i = 0; $i < count($id_producto); $i++) {
             $producto = tbl_producto::findOrFail($id_producto[$i]);
@@ -71,14 +87,42 @@ class TblFacturaController extends Controller{
             $producto->update(['stock' => $producto->stock - $cantidad_vendida]);
             if ($producto->stock == 0) {
                 $producto->update(['estado' => 'DESHABILITADO']);
+
+                // Obtener el nombre del producto
+                $nombreProducto = $producto->nombrep;
+
+                // Obtener el ID del vendedor
+                $idVendedor = $id_tendero[$i];
+
+                // Verificar si ya se agregó el vendedor al array
+                if (!isset($productosSinStockPorVendedor[$idVendedor])) {
+                    $productosSinStockPorVendedor[$idVendedor] = [];
+                }
+
+                // Agregar el nombre del producto al array correspondiente al vendedor
+                $productosSinStockPorVendedor[$idVendedor][] = $nombreProducto;
             }
         }
+
+        // Enviar notificaciones a los vendedores correspondientes
+        foreach ($productosSinStockPorVendedor as $idVendedor => $productosSinStock) {
+            $vendedor = User::find($idVendedor);
+            $vendedor->notify(new ProductosSinStockNotification($productosSinStock));
+        }
+
         // Crear la factura
         $factura = request()->except('id', 'total_prod', 'cantidad', 'id_tendero', '_token');
         $createdFactura = Tbl_Factura::create($factura);
         $id_factura = $createdFactura->id_factura;
+
         // Guardar los detalles de la factura
         for ($i = 0; $i < count($id_producto); $i++) {
+            $idtendero = $id_tendero[$i];
+
+            if (!in_array($idtendero, $vendedoresFacturaPendiente)) {
+                $vendedoresFacturaPendiente[] = $idtendero;
+            }
+
             $datasave = [
                 'producto_id' => $id_producto[$i],
                 'total_producto' => $total_prod[$i],
@@ -88,10 +132,24 @@ class TblFacturaController extends Controller{
                 'estado' => 'PENDIENTE',
             ];
             DB::table('tbl_factura_producto')->insert($datasave);
+
+           
         }
+
+        foreach ($vendedoresFacturaPendiente as $idtendero) {
+            $vendedor = User::find($idtendero);
+            $vendedor->notify(new FacturaPendienteNotification($id_factura));
+        }
+
+        
+
         return redirect()->back()->with('success', 'La compra se registró con éxito!');
+
     }
-    //      //
+#endregion
+
+
+#region pdf
     public function pdf(){
         $usuario_id = Auth::user()->id_usuario;
         $factura_id = tbl_factura::where('cliente_id', $usuario_id)
@@ -119,6 +177,10 @@ class TblFacturaController extends Controller{
         $pdf = PDF::loadview('templates.pdf.facturac',['factura'=>$factura,'factura_producto'=>$factura_producto]);
         return $pdf->stream();
     }
+#endregion
+
+
+#region pdf2
     public function pdf2($id){
         $usuario = Auth::user()->id_usuario;
         //      //
@@ -144,6 +206,11 @@ class TblFacturaController extends Controller{
         $pdf = PDF::loadview('templates.pdf.facturat',['factura'=>$factura,'factura_producto'=>$factura_producto,'sum'=>$sum]);
         return $pdf->stream();
     }
+
+#endregion
+
+
+#region cambiarestado
     public function cambiarestado($id){
         $usuario = Auth::user()->id_usuario;
         //      //
@@ -159,7 +226,19 @@ class TblFacturaController extends Controller{
                 ->where('factura_id','=',$id)
                 ->where('tendero_id','=',$usuario)
                 ->update(['estado'=>'COMPLETADO']);
+
+            $facturaCompletada = DB::table('tbl_factura_producto')
+            ->where('factura_id', $id)
+            ->where('estado', '!=', 'COMPLETADO')
+            ->doesntExist();
+
+            if ($facturaCompletada) {
+                // Todos los registros de la factura están completados
+                event(new \App\Events\FacturasCompletadas($id));
+            }
+
             return redirect()->back();
+            
         } else {
             DB::table('tbl_factura_producto')
                 ->select('estado')
@@ -169,7 +248,12 @@ class TblFacturaController extends Controller{
             return redirect()->back();
         }
     }
-    //      //
+
+#endregion
+
+
+#region pendiente
+
     public function pendiente(){
         $rol = Auth::user()->rol_id;
         $usuario = Auth::user()->id_usuario;
@@ -192,7 +276,10 @@ class TblFacturaController extends Controller{
             return view('templates.estadof.pendientes', compact('facturas','usuario','rol',));
         }
     }
-    //      //
+#endregion
+
+
+#region completado
     public function completado(){
         $rol = Auth::user()->rol_id;
         $usuario = Auth::user()->id_usuario;
@@ -215,4 +302,5 @@ class TblFacturaController extends Controller{
             return view('templates.estadof.completado', compact('facturas','usuario','rol',));
         }
     }
+#endregion
 }
