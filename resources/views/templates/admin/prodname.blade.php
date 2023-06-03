@@ -12,7 +12,7 @@
             @foreach ($nombres as $name)
                 <div class="bg-gray-200 p-6 rounded-lg shadow-xl flex items-center justify-center flex-col">
                     <div class="w-full text-center font-medium mb-4">
-                        <p class="text-xl uppercase text-primary">N° {{$loop->iteration}}</p>
+                        <p class="text-xl uppercase text-primary">N° {{ ($nombres->currentPage() - 1) * $nombres->perPage() + $loop->index + 1 }}</p>
                         <p class="text-md uppercase text-primary">{{$name->nombre}}</p>
                     </div>
                     <div class="flex justify-center gap-2 sm:gap-3 lg:gap-4 w-full sm:w-auto">
@@ -21,17 +21,13 @@
                                 <img src="{{ asset('iconos/edit.svg') }}" class="nav"> Editar
                             </button>
                         </form>
-                        <form action="{{url('/nombres/'.$name->id_nombrep)}}" method="POST" class="form_delete">
-                            @csrf
-                            {{method_field('DELETE')}}
-                            <button type="submit" class="bg-check text-white font-semibold px-7 sm:px-5 py-2 rounded-lg text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300">
-                                <img src="{{ asset('iconos/trash.svg') }}" class="nav"> Eliminar
-                            </button>
-                        </form>
                     </div>
                 </div>
             @endforeach
         </div>
+    </div>
+    <div class="flex w-full items-center justify-center">
+        {{$nombres->links("pagination::my-pagination")}}
     </div>
 @endsection
 @section('js')

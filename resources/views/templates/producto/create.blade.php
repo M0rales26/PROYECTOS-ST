@@ -31,7 +31,7 @@
                         </div>
                         <div class="w-full sm:w-[80%] bg-gray-100 border-2 border-primary flex items-center rounded-xl">
                             <img src="{{ asset('iconos/package.svg') }}" class="ml-4">
-                            <input type="number" name="stock" class="outline-none px-3 py-2 w-full bg-transparent placeholder:text-black" placeholder="Stock Producto" value="{{ old('stock') }}" autocomplete="off">
+                            <input type="number" name="stock" class="outline-none px-3 py-2 w-full bg-transparent placeholder:text-black" placeholder="Cantidad Disponible" value="{{ old('stock') }}" autocomplete="off">
                         </div>
                         <div class="w-full sm:w-[80%] bg-gray-100 border-2 border-primary flex items-center rounded-xl">
                             <img src="{{ asset('iconos/image.svg') }}" class="ml-4">

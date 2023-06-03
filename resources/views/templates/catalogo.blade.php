@@ -18,13 +18,13 @@
                         <p class="text-md">{{$prd->nombrep}}</p>
                         <p>${{$prd->precio}}</p>
                         <p>{{$prd->peso_neto}}</p>
-                        <p class="text-red-500 font-semibold"> Stock {{$prd->stock}}</p>
+                        <p class="text-red-500 font-semibold text-sm mt-3"> Cantidad Disponible: {{$prd->stock}}</p>
                     </div>
-                    <div class="w-full text-center my-4">
+                    <div class="w-full text-center my-3">
                         @if ($prd->estado=='HABILITADO')
-                            <a href="{{route('change.status',$prd->id_producto)}}" class="text-sky-500">HABILITADO</a>
+                            <a href="{{route('change.status',$prd->id_producto)}}" class="text-sky-500 font-semibold">HABILITADO</a>
                         @else
-                            <a href="{{route('change.status',$prd->id_producto)}}" class="text-red-500">DESHABILITADO</a>
+                            <a href="{{route('change.status',$prd->id_producto)}}" class="text-red-500 font-semibold">DESHABILITADO</a>
                         @endif
                     </div>
                     <div class="flex justify-center w-full">

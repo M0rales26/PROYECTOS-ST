@@ -12,7 +12,7 @@ class AdminController extends Controller{
         $nombres = DB::table('tbl_listado_nombresp')
             ->select('id_nombrep','nombre')
             ->orderBy('nombre','asc')
-            ->paginate(20);
+            ->paginate(12);
         return view('templates.admin.prodname', compact('nombres'));
     }
     //      //
@@ -63,11 +63,6 @@ class AdminController extends Controller{
         $nombre = request()->except(['_token', '_method']);
         Tbl_Listado_Nombresp::where('id_nombrep', '=', $id)->update($nombre);
         return redirect()->route('nombres.index')->with('Actualizado','ok');
-    }
-    //      //
-    public function destroy($id){
-        Tbl_Listado_Nombresp::destroy($id);
-        return redirect()->route('nombres.index')->with('Eliminado','ok');
     }
     //      //
     public function indexa(){
