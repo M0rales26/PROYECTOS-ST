@@ -53,7 +53,6 @@ class TodasFacturasCompletadasNotification extends Notification
         ->subject('Factura Completada')
 		->greeting('Hola')
         ->line('La factura número ' . $this->facturaNumero . ' ha sido completada.')
-        ->action('Ver Factura', url('/facturas/' . $this->facturaNumero))
         ->salutation('¡Gracias por usar nuestra aplicación!');
     }
 }

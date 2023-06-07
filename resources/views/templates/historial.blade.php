@@ -33,7 +33,7 @@
                         <div class="w-[95%]">
                             <form action="{{route('historial.pdf',['id'=>$fact->id_factura])}}" method="get" class="grid place-items-center">
                                 <button type="submit" class="bg-primary text-white font-semibold px-2 sm:px-5 py-1 rounded-lg text-sm flex items-center justify-center gap-1 sm:gap-2 hover:scale-105 duration-300 w-full">
-                                    <img src="{{ asset('iconos/pdf.svg') }}" class="nav"> Ver Factura
+                                    <img src="{{ asset('iconos/pdf.svg') }}" class="nav"> Ver Comprobante
                                 </button>
                             </form>
                         </div>

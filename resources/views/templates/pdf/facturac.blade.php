@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{public_path('css/pdf.css')}}" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <title>FACTURA PDF</title>
+    <title>COMPROBANTE</title>
 </head>
 <body>
     <div>
@@ -14,7 +14,7 @@
         @foreach ($factura_producto as $item)
         @endforeach
         {{-- // --}}
-        <h1 class="title">FACTURA N° {{$item->factura_id}}</h1>
+        <h1 class="title">COMPROBANTE N° {{$item->factura_id}}</h1>
         <table class="info">
             <tr>
                 @if (auth()->check())

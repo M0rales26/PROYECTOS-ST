@@ -13,16 +13,10 @@ class TblProductoController extends Controller{
     public function index(){
         $datos['producto'] = tbl_producto::where('usuario_id', auth()->user()->id_usuario)->get();
         return view('templates.catalogo', $datos);
-        //      //
-        // $productosSinStock = DB::table('tbl_producto')->where('usuario_id', auth()->user()->id_usuario)->where('stock', 0)->get();
-        // if ($productosSinStock->isNotEmpty()) {
-        //     return view('templates.catalogo', compact('productosSinStock', $datos))->with('error','Hay productos sin stock, por favor actualícelos');
-        // } else {
-        // }
     }
     //      //
     public function create(){
-        $nombres = Tbl_Listado_Nombresp::all();
+        $nombres = Tbl_Listado_Nombresp::where('estado','=','HABILITADO')->get();
         return view('templates.producto.create', compact('nombres'));
     }
     //      //

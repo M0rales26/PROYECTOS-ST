@@ -50,6 +50,7 @@ class CarritoController extends Controller{
                     'imagen' => $product->foto,
                     'descripcion' => $product->peso_neto,
                     'stock' => $product->stock,
+                    'nombre' => $product->name,
                     'id_tendero' => $product->usuario_id
                 )
             );
@@ -60,13 +61,16 @@ class CarritoController extends Controller{
     }
     //      //
     public function update(Request $request){
-        Cart::update($request->id,
-            array(
-                'quantity' => array(
-                    'relative' => false,
-                    'value' => $request->quantity
-                ),
-            ));
+        $validatedData = $request->validate([
+            'id' => 'required',
+            'quantity' => 'required|numeric|greater_than_zero',
+        ]);
+        Cart::update($validatedData['id'], [
+            'quantity' => [
+                'relative' => false,
+                'value' => $validatedData['quantity']
+            ],
+        ]);
         return back();
     }
     //      //

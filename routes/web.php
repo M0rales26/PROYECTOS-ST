@@ -4,11 +4,13 @@ use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\ComparacionController;
+use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TiendaController;
 use App\Http\Controllers\TblUSuarioController;
 use App\Http\Controllers\TblProductoController;
 use App\Http\Controllers\TblFacturaController;
+use App\Http\Controllers\ProveedorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -109,6 +111,9 @@ Route::get('tienda/{id}', [TiendaController::class, 'info'])
 Route::get('estado/producto/{id}',[TblProductoController::class, 'cambiarestado'])
     ->middleware('auth')
     ->name('change.status');
+Route::get('estado/nombrep/{id}',[AdminController::class, 'cambiarestado'])
+    ->middleware('auth')
+    ->name('change.status.name');
 Route::get('estado/factura/{id}',[TblFacturaController::class, 'cambiarestado'])
     ->middleware('auth')
     ->name('change.status.fact');
@@ -124,6 +129,13 @@ Route::get('admins/crear', [AdminController::class, 'createa'])
 Route::post('admins/crear', [AdminController::class, 'storea'])
     ->middleware('auth')
     ->name('admins.store');
+//-----------------------------------------------------------//
+Route::get('contacto', [ContactoController::class, 'index'])
+    ->middleware('auth')
+    ->name('contacto.index');
+Route::post('/contacto',[ContactoController::class, 'enviarcorreo'])
+    ->middleware('auth')
+    ->name('enviar.correo');
 //-----------------------------------------------------------//
 Route::get('/logout',[LoginController::class, 'destroy'])
     ->middleware('auth')
@@ -141,3 +153,30 @@ Route::get('password/reset/{token}', 'App\Http\Controllers\Auth\ResetPasswordCon
 // Actualizar la contraseña
 Route::post('password/reset', 'App\Http\Controllers\Auth\ResetPasswordController@reset')
     ->name('password.update');
+//-----------------------------------------------------------//
+Route::get('/proveedor', [ProveedorController::class, 'cart'])
+    ->middleware('auth')
+    ->name('proveedor.index');
+Route::post('/proveedor/add', [ProveedorController::class, 'store'])
+    ->middleware('auth')
+    ->name('proveedor.store');
+Route::post('/proveedor/update', [ProveedorController::class, 'update'])
+    ->middleware('auth')
+    ->name('proveedor.update');
+Route::post('/proveedor/remove', [ProveedorController::class, 'remove'])
+    ->middleware('auth')
+    ->name('proveedor.remove');
+Route::post('/proveedor/clear', [ProveedorController::class, 'clear'])
+    ->middleware('auth')
+    ->name('proveedor.clear');
+Route::post('/proveedor/insert', [ProveedorController::class, 'insert'])
+    ->middleware('auth')
+    ->name('proveedor.insertar');
+//-----------------------------------------------------------//
+Route::get('/recibo', [TblFacturaController::class, 'indexrecibo'])
+    ->middleware('auth')
+    ->name('parametrizado.index');
+Route::get('/recibo/parametrizada', [TblFacturaController::class, 'recibo_parametrizado'])
+    ->middleware('auth')
+    ->name('recibo.parametrizado');
+//-----------------------------------------------------------//

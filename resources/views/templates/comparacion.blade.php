@@ -7,7 +7,7 @@
             @foreach ($producto as $com)
                 <div class="bg-gray-200 p-6 rounded-lg shadow-xl flex items-center justify-center flex-col">
                     <div class="mb-4">
-                        <img src="/imgprod/{{$com->foto}}" class="w-52 h-52 border-2 border-primary rounded-lg bg-white">
+                        <img src="/imgprod/{{$com->foto}}" class="w-52 h-52 rounded-lg bg-white">
                     </div>
                     <div class="w-full text-center font-medium">
                         <p class="font-semibold text-primary">{{$com->name}}</p>
@@ -25,7 +25,7 @@
                             </button>
                         </form>
                         <form action="{{route('grafica.producto',$com->id_producto)}}">
-                            <button type="submit" class="bg-[#e83838] text-white px-5 py-1 rounded-lg text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300 w-full">
+                            <button type="submit" class="bg-false text-white px-5 py-1 rounded-lg text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300 w-full">
                                 <img src="{{ asset('iconos/chart.svg') }}" class="nav"> Ver Gráfica
                             </button>
                         </form>

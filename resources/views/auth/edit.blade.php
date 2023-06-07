@@ -15,7 +15,7 @@
                     <div class="flex flex-col items-center gap-4 mb-6">
                         <div class="w-full sm:w-[80%] bg-gray-100 border-2 border-primary flex items-center rounded-xl">
                             <img src="{{ asset('iconos/user.svg') }}" class="ml-4">
-                            <input type="text" name="name" class="outline-none px-3 py-2 w-full bg-transparent" value="{{$datosperfil->name}}" autocomplete="off">
+                            <input type="text" name="name" class="outline-none px-3 py-2 w-full bg-transparent text-gray-400" value="{{$datosperfil->name}}" autocomplete="off" disabled>
                         </div>
                         <div class="w-full sm:w-[80%] bg-gray-100 border-2 border-primary flex items-center rounded-xl">
                             <img src="{{ asset('iconos/email.svg') }}" class="ml-4">
