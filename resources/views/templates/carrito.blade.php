@@ -7,46 +7,38 @@
         @foreach ($cartCollection as $item)
         @endforeach
         {{-- // --}}
-        <div class="p-6">
-            <div class="w-full flex flex-col sm:flex-row lg:flex-row items-center justify-around mb-6">
-                <div class="flex items-center justify-around gap-6 p-3 mb-5 bg-gray-200 shadow-xl rounded-lg w-full sm:w-3/5 lg:w-1/2">
-                    <div class="flex items-center justify-center gap-2">
+        <div class="px-6 pt-6 pb-2">
+            <div class="w-full mb-6 flex flex-col sm:flex-row items-center justify-between">
+                <div class="flex items-center ml-2">
+                    <h2 class="text-2xl font-bold text-center uppercase text-primary flex gap-2">
                         <img src="{{ asset('iconos/coins.svg') }}" class="">
-                        <h2 class="font-semibold text-sm sm:text-xl"> Valor Total:
-                            <span class="text-primary">{{Cart::getTotal()}}</span>
-                        </h2>
-                    </div>
-                    <form action="{{route('cart.clear')}}" method="POST">
+                        Valor Total: {{Cart::getTotal()}}
+                    </h2>
+                </div>
+                <div class="flex items-center gap-4 mr-12">
+                    <form action="{{route('proveedor.clear')}}" method="POST">
                         @csrf
                         <input type="hidden" name="products_id" id="products_id" value="{{$item->id_producto}}">
-                        <button type="submit" class="bg-primary text-white font-semibold px-2 sm:px-5 py-2 rounded-lg text-sm flex items-center justify-center gap-1 sm:gap-2 hover:scale-105 duration-300">
-                            <img src="{{ asset('iconos/trash.svg') }}" class="nav"> <span class="text-xs sm:text-sm">Vaciar Carrito</span>
+                        <button type="submit" class="bg-primary text-white font-semibold px-5 py-2 rounded-lg text-sm flex items-center justify-center gap-1 sm:gap-2 hover:scale-105 duration-300">
+                            <img src="{{ asset('iconos/trash.svg') }}" class="nav"> Vaciar Carrito
                         </button>
                     </form>
-                </div>
-                <div class="w-full sm:w-1/3 lg:w-1/5 h-16 sm:mb-5 flex items-center justify-center gap-4 bg-gray-200 rounded-lg shadow-xl">
-                    <div class="h-10 bg-primary text-white font-semibold px-14 sm:px-5 rounded-lg text-sm flex items-center justify-center gap-1 sm:gap-2 hover:scale-105 duration-300">
-                        <table>
-                            <tbody>
-                                <form action="{{route('factura.save')}}" method="POST">
-                                    @csrf
-                                    @foreach ($cartCollection as $prod)
-                                    <tr>
-                                        <input type="hidden" name="id[]" value="{{$prod->id}}">
-                                        <input type="hidden" name="cliente_id" value="{{auth()->user()->id_usuario}}">
-                                        <input type="hidden" name="total_prod[]" value="{{$prod->price * $prod->quantity}}">
-                                        <input type="hidden" name="cantidad[]" value="{{$prod->quantity}}">
-                                        <input type="hidden" name="id_tendero[]" value="{{$prod->attributes->id_tendero}}"><br>
-                                    </tr>
-                                    @endforeach
-                                    <input type="hidden" name="total" value="{{Cart::getTotal()}}">
-                                    <button type="submit" class="flex items-center justify-center gap-2">
-                                        <img src="{{ asset('iconos/fileplus.svg') }}" class="nav"> Comprar
-                                    </button>
-                                </form>
-                            </tbody>
-                        </table>
-                    </div>
+                    <form action="{{route('factura.save')}}" method="POST">
+                        @csrf
+                        @foreach ($cartCollection as $prod)
+                        <tr>
+                            <input type="hidden" name="id[]" value="{{$prod->id}}">
+                            <input type="hidden" name="cliente_id" value="{{auth()->user()->id_usuario}}">
+                            <input type="hidden" name="total_prod[]" value="{{$prod->price * $prod->quantity}}">
+                            <input type="hidden" name="cantidad[]" value="{{$prod->quantity}}">
+                            <input type="hidden" name="id_tendero[]" value="{{$prod->attributes->id_tendero}}">
+                        </tr>
+                        @endforeach
+                        <input type="hidden" name="total" value="{{Cart::getTotal()}}">
+                        <button type="submit" class="bg-primary text-white px-5 py-2 rounded-lg text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300 font-semibold">
+                            <img src="{{ asset('iconos/checkfull.svg') }}" class="nav"> Confirmar Compra
+                        </button>
+                    </form>
                 </div>
             </div>
             {{-- // --}}
@@ -54,11 +46,11 @@
                 @foreach ($cartCollection as $prd)
                     <div class="bg-gray-200 p-6 rounded-lg shadow-xl w-full sm:w-auto flex items-center justify-center flex-col">
                         <div class="mb-4">
-                            <img src="{{ url('imgprod/' . $prd->attributes->imagen)}}" class="w-52 h-52 border-2 border-primary rounded-lg bg-white">
+                            <img src="{{ url('imgprod/' . $prd->attributes->imagen)}}" class="w-52 h-52 rounded-lg bg-white">
                         </div>
                         <div class="text-center">
                             <p>{{$prd->name}}</p>
-                            <p>{{$prd->price}}</p>
+                            <p>${{$prd->price}}</p>
                             <p>{{$prd->attributes->descripcion}}</p>
                             <p class="font-bold text-red-600">Cantidad: {{$prd->quantity}}</p>
                         </div>
@@ -68,7 +60,7 @@
                                     @csrf
                                     <div class="">
                                         <input type="hidden" name="id" id="id" value="{{$prd->id}}">
-                                        <input type="number" name="quantity" min="1" value="{{$prd->quantity}}" autocomplete="off" class="w-44 sm:w-24 rounded-lg bg-white px-4 py-1 text-center outline-none border-2 border-primary">
+                                        <input type="number" name="quantity" id="quantity" value="{{$prd->quantity}}" autocomplete="off" class="w-44 sm:w-24 rounded-lg bg-white px-4 py-1 text-center outline-none border-2 border-primary">
                                     </div>
                                     <div class="">
                                         <button type="submit" class="bg-primary grid place-items-center h-8 w-8  rounded-full hover:scale-105 duration-300">
@@ -77,7 +69,7 @@
                                     </div>
                                 </form>
                             </div>
-                            <div class="w-full flex items-center justify-center py-2">
+                            <div class="w-full flex items-center justify-center">
                                 <form action="{{route('cart.remove')}}" method="POST">
                                     @csrf
                                     <input type="hidden" name="id" value="{{$prd->id}}">
@@ -107,6 +99,15 @@
     <script src="{{asset('assets/js/sweetalert2.all.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery.min.js')}}"></script>
     <link href="{{asset('assets/css/sweetalert2.min.css')}}" rel="stylesheet" type="text/css">
+    @if(session('success'))
+        <script>
+            Swal.fire(
+                '',
+                'La compra se registró con exito!',
+                'success'
+            )
+        </script>
+    @endif
     @if(session('error'))
         <script>
             Swal.fire(

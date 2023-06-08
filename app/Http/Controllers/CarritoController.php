@@ -13,7 +13,7 @@ class CarritoController extends Controller{
     public function shop(Request $request){
         $texto = trim($request->get('texto'));
         $producto = DB::table('tbl_producto')
-                    ->select('id_producto','nombrep','precio','peso_neto','foto','estado','tbl_usuario.name')
+                    ->select('id_producto','nombrep','precio','peso_neto','foto','estado','stock','tbl_usuario.name')
                     ->join('tbl_usuario','tbl_producto.usuario_id','=','tbl_usuario.id_usuario')
                     ->where('nombrep','LIKE','%'.$texto.'%')
                     ->where('estado','HABILITADO')
@@ -48,7 +48,9 @@ class CarritoController extends Controller{
                 1,
                 array(
                     'imagen' => $product->foto,
-                    'descripcion' => $product->contenido_neto,
+                    'descripcion' => $product->peso_neto,
+                    'stock' => $product->stock,
+                    'nombre' => $product->name,
                     'id_tendero' => $product->usuario_id
                 )
             );
@@ -59,13 +61,16 @@ class CarritoController extends Controller{
     }
     //      //
     public function update(Request $request){
-        Cart::update($request->id,
-            array(
-                'quantity' => array(
-                    'relative' => false,
-                    'value' => $request->quantity
-                ),
-            ));
+        $validatedData = $request->validate([
+            'id' => 'required',
+            'quantity' => 'required|numeric|greater_than_zero',
+        ]);
+        Cart::update($validatedData['id'], [
+            'quantity' => [
+                'relative' => false,
+                'value' => $validatedData['quantity']
+            ],
+        ]);
         return back();
     }
     //      //

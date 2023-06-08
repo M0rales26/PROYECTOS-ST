@@ -2,40 +2,50 @@
 @section('title', 'Catálogo de Productos' )
 
 @section('content')
-    <div class="p-6">
-        <div class="w-full mb-6 flex justify-center">
-            <a href="{{route('producto.create')}}" class="w-full sm:w-96 lg:w-80 bg-primary text-white px-5 py-2 rounded-lg text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300 font-semibold">
-                <img src="{{ asset('iconos/plus.svg') }}" class="nav"> Agregar Producto
-            </a>
+    <div class="px-6 pt-6 pb-2">
+        <div class="w-full mb-6 flex flex-col sm:flex-row items-center justify-end">
+            <div class="flex items-center gap-4 mr-12">
+                <a href="{{route('producto.create')}}" class="bg-primary text-white px-5 py-2 rounded-lg text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300 font-semibold">
+                    <img src="{{ asset('iconos/plus.svg') }}" class="nav"> Agregar Producto
+                </a>
+                <a href="{{route('proveedor.index')}}" class="bg-primary text-white px-5 py-2 rounded-lg text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300 font-semibold">
+                    <img src="{{ asset('iconos/shop.svg') }}" class="nav"> Pedido Proveedor
+                </a>
+            </div>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-6 mb-6">
             @foreach ($producto as $prd)
                 <div class="bg-gray-200 p-6 rounded-lg shadow-xl flex items-center justify-center flex-col">
                     <div class="mb-4">
-                        <img src="{{ url('imgprod/' . $prd->foto)}}" class="w-52 h-52 bg-white border-2 border-primary rounded-lg">
+                        <img src="{{ url('imgprod/' . $prd->foto)}}" class="w-52 h-52 bg-white rounded-lg">
                     </div>
-                    <div class="w-full text-center font-medium">
+                    <div class="w-full text-center font-medium mb-2">
                         <p class="text-md">{{$prd->nombrep}}</p>
                         <p>${{$prd->precio}}</p>
                         <p>{{$prd->peso_neto}}</p>
-                        <p class="text-red-500 font-semibold"> Stock {{$prd->stock}}</p>
+                        <p class="text-red-500 font-semibold text-sm mt-3"> Cantidad Disponible: {{$prd->stock}}</p>
+                        <p class="text-sky-500 font-semibold text-sm mt-2"> Estado: {{$prd->estado}}</p>
                     </div>
-                    <div class="w-full text-center my-4">
-                        @if ($prd->estado=='HABILITADO')
-                            <a href="{{route('change.status',$prd->id_producto)}}" class="text-sky-500">HABILITADO</a>
-                        @else
-                            <a href="{{route('change.status',$prd->id_producto)}}" class="text-red-500">DESHABILITADO</a>
-                        @endif
-                    </div>
-                    <div class="flex justify-center gap-2 sm:gap-3 lg:gap-4 w-full sm:w-auto">
-                        <form action="{{url('/producto/'.$prd->id_producto.'/edit/')}}">
-                            <button type="submit" class="bg-primary text-white font-semibold px-7 sm:px-5 py-2 rounded-lg text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300">
-                                <img src="{{ asset('iconos/edit.svg') }}" class="nav"> Editar
+                    <div class="flex flex-col gap-2 mt-3 w-[95%] sm:w-full">
+                        <form action="{{route('proveedor.store')}}" method="POST">
+                            @csrf
+                            <input type="hidden" name="products_id" id="products_id" value="{{$prd->id_producto}}">
+                            <button type="submit" class="bg-primary text-white px-5 py-1 rounded-lg text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300 w-full font-medium">
+                                <img src="{{ asset('iconos/cart-add.svg') }}" class="nav">  Agregar a Pedido
                             </button>
                         </form>
-                        <form action="" method="POST" class="form_delete">
-                            <button class="bg-check text-white font-semibold px-7 sm:px-5 py-2 rounded-lg text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300">
-                                <img src="{{ asset('iconos/trash.svg') }}" class="nav"> Habilitar
+                        @if ($prd->estado=='HABILITADO')
+                            <a href="{{route('change.status',$prd->id_producto)}}" type="submit" class="bg-false text-white px-5 py-1 rounded-lg text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300 w-full font-medium">
+                                <img src="{{ asset('iconos/change.svg') }}" class="nav"> Deshabilitar
+                            </a>
+                        @else
+                            <a href="{{route('change.status',$prd->id_producto)}}" type="submit" class="bg-check text-white px-5 py-1 rounded-lg text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300 w-full font-medium">
+                                <img src="{{ asset('iconos/change.svg') }}" class="nav"> Habilitar
+                            </a>
+                        @endif
+                        <form action="{{url('/producto/'.$prd->id_producto.'/edit/')}}" method="GET">
+                            <button type="submit" class="bg-yellow-500 text-white px-5 py-1 rounded-lg text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300 w-full font-medium">
+                                <img src="{{ asset('iconos/edit.svg') }}" class="nav"> Editar Producto
                             </button>
                         </form>
                     </div>

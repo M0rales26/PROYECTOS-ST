@@ -1,5 +1,5 @@
 @extends('layouts.menu')
-@section('title', 'Facturas Pendientes' )
+@section('title', 'Pedidos Pendientes' )
 
 @section('content')
     @if (isset($error))
@@ -14,38 +14,45 @@
         </div>
     @else
         <div class="px-6 pt-6 pb-2">
-            <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-6 mb-6 place-items-center">
-                @foreach ($facturas as $fact)
-                    <div class="bg-gray-200 p-6 rounded-lg shadow-xl w-full h-72 gap-6 flex items-center justify-between flex-col">
-                        <div class="w-full text-center text-xl">
-                            <p class="font-bold uppercase text-primary">Factura N° {{ $fact->factura_id }}</p>
-                        </div>
-                        <div class="text-center">
-                            <p class="flex flex-col">
-                                <span class="text-md font-semibold">Realizada por:</span>
-                                <span class="text-lg text-primary">{{$fact->name}}</span>
-                            </p>
-                        </div>
-                        <div class="w-full text-center flex flex-col gap-1">
-                            <p class="font-semibold">Estado de la Factura</p>
-                            @if ($fact->estado == 'PENDIENTE')
-                                <a href="{{route('change.status.fact', ['id'=>$fact->factura_id])}}" class="text-red-500">PENDIENTE</a>
-                            @else
-                                <a href="{{route('change.status.fact', ['id'=>$fact->factura_id])}}" class="text-lime-500">COMPLETADO</a>
-                            @endif
-                        </div>
-                        <div class="w-[85%]">
-                            <form action="{{route('factura.pdf2',['id'=>$fact->factura_id])}}" method="get" class="grid place-items-center">
-                                <button type="submit" class="bg-primary text-white font-semibold px-2 sm:px-5 py-1 rounded-lg text-sm flex items-center justify-center gap-1 sm:gap-2 hover:scale-105 duration-300 w-full">
-                                    <img src="{{ asset('iconos/pdf.svg') }}" class="nav"> Ver Factura
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                @endforeach
+            <div class="bg-gray-200 p-5 shadow-lg rounded-xl w-full">
+                <table class="w-full border-separate border-spacing-y-3 border-spacing-x-1">
+                    <thead class="text-primary text-xl">
+                        <tr>
+                            <th class="w-24">Pedido N°</th>
+                            <th class="w-96">Realizada Por</th>
+                            <th class="w-44">Estado</th>
+                            <th class="w-44">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        @foreach ($facturas as $fact)
+                            <tr>
+                                <td class="">N° {{ $fact->factura_id}}</td>
+                                <td class="">{{$fact->name}}</td>
+                                <td class="">{{$fact->estado}}</td>
+                                <td class="">
+                                    <div class="flex justify-center gap-5">
+                                        <form action="{{route('factura.pdf2',['id'=>$fact->factura_id])}}">
+                                            <button type="submit" class="bg-primary text-white font-semibold px-7 sm:px-5 py-2 rounded-lg text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300" title="Ver Comprobante">
+                                                <img src="{{ asset('iconos/pdf.svg') }}" class="nav">
+                                            </button>
+                                        </form>
+                                        @if ($fact->estado=='PENDIENTE')
+                                            <a href="{{route('change.status.fact', ['id'=>$fact->factura_id])}}" type="submit" class="bg-check text-white px-5 py-2 rounded-lg text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300 w-42 font-medium" title="Cambiar a Completado">
+                                                <img src="{{ asset('iconos/change.svg') }}" class="nav">
+                                            </a>
+                                        @endif
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     @endif
     {{-- // --}}
-    {{$facturas->links("pagination::my-pagination")}}
+    <div class="flex w-full items-center justify-center">
+        {{$facturas->links("pagination::my-pagination")}}
+    </div>
 @endsection

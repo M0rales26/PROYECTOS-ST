@@ -3,8 +3,8 @@
 
 @section('content')
     <div class="flex flex-col items-center justify-center text-center w-full h-screen flex-1 px-20">
-        <div class="bg-gray-200 rounded-2xl shadow-xl w-[150%] sm:w-[100%] lg:w-[60%]">
-            <div class="w-full p-5">
+        <div class="bg-gray-200 rounded-2xl shadow-xl w-[160%] sm:w-[100%] lg:w-[60%]">
+            <div class="h-full p-5">
                 <div class="my-4">
                     <h2 class="text-3xl font-bold text-primary mb-1">Agregar Producto</h2>
                     <div class="border-2 w-10 border-primary inline-block mb-2"></div>
@@ -31,7 +31,7 @@
                         </div>
                         <div class="w-full sm:w-[80%] bg-gray-100 border-2 border-primary flex items-center rounded-xl">
                             <img src="{{ asset('iconos/package.svg') }}" class="ml-4">
-                            <input type="number" name="stock" class="outline-none px-3 py-2 w-full bg-transparent placeholder:text-black" placeholder="Stock Producto" value="{{ old('stock') }}" autocomplete="off">
+                            <input type="number" name="stock" class="outline-none px-3 py-2 w-full bg-transparent placeholder:text-black" placeholder="Cantidad Disponible" value="{{ old('stock') }}" autocomplete="off">
                         </div>
                         <div class="w-full sm:w-[80%] bg-gray-100 border-2 border-primary flex items-center rounded-xl">
                             <img src="{{ asset('iconos/image.svg') }}" class="ml-4">

@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('tbl_listado_nombresp', function (Blueprint $table) {
             $table->id('id_nombrep');
             $table->string('nombre');
+            $table->string('estado');
             $table->timestamps();
         });
     }
