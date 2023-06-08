@@ -98,7 +98,6 @@ class ComparacionController extends Controller{
         }
         // Si es el mes siguiente al actual, vaciar los datos de la gráfica
         if ($esMesSiguiente) {
-            $fechas = [];
             $precios = [];
         }
         // Obtener la información adicional del producto
@@ -107,16 +106,11 @@ class ComparacionController extends Controller{
             ->where('id_producto', $id)
             ->where('estado', 'HABILITADO')
             ->get();
-        // Devolver la vista con los datos para la gráfica
-        // if($fechas->isEmpty() && $precios->isEmpty() && $uno->isEmpty()){
-        //     $error = 'No se encontraron datos';
-        //     return view('templates.grafica', compact('error'));
-        // }else{
-            return view('templates.grafica', [
-                'fechas' => $fechas,
-                'precios' => $precios,
-                'producto' => $uno,
-            ]);
-        // }
+        //Devolver la vista con los datos para la gráfica
+        return view('templates.grafica', [
+            'fechas' => $fechas,
+            'precios' => $precios,
+            'producto' => $uno,
+        ]);
     }
 }

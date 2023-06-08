@@ -70,17 +70,3 @@
         </div>
     </div>
 @endsection
-@section('js')
-    <script src="{{asset('assets/js/sweetalert2.all.min.js')}}"></script>
-    <script src="{{asset('assets/js/jquery.min.js')}}"></script>
-    <link href="{{asset('assets/css/sweetalert2.min.css')}}" rel="stylesheet" type="text/css">
-    @if(isset($error))
-        <script>
-            Swal.fire(
-                '',
-                '{{ $error }}',
-                'error'
-            )
-        </script>
-    @endif
-@endsection

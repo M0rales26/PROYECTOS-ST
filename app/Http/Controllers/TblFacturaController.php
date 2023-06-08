@@ -13,6 +13,7 @@ use Barryvdh\DomPDF\Facade\PDF;
 use App\Notifications\ProductosSinStockNotification;
 use App\Models\User;
 use App\Notifications\FacturaPendienteNotification;
+use Carbon\Carbon;
 
 class TblFacturaController extends Controller{
 #region historial
@@ -268,8 +269,10 @@ class TblFacturaController extends Controller{
     }
     //      //
     public function recibo_parametrizado(Request $request){
-        $mes = $request->input('mes');
-        $anio = $request->input('anio');
+        $fechaActual = Carbon::now();
+        // Obtener el mes de la solicitud o el mes actual si no se proporciona
+        $mes = $request->input('mes', $fechaActual->month);
+        $anio = $request->input('anio', $fechaActual->year);
         //      //
         $top_vendedores = DB::table('tbl_factura_producto')
             ->select('tbl_usuario.id_usuario', 'tbl_usuario.name', DB::raw('SUM(tbl_factura_producto.cantidad) as total_vendido'))
