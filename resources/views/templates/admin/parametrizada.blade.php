@@ -2,10 +2,10 @@
 @section('title', 'Estadísticas' )
 
 @section('content')
-    <div class="w-full h-screen p-5 flex items-start justify-end">
-        <div class="w-full sm:w-2/5 p-5 bg-gray-200 rounded-lg shadow-xl">
-            <p class="mb-6 text-xl font-semibold text-primary uppercase">Filtrar las estadísticas por mes y año:</p>
-            <form action="{{route('recibo.parametrizado')}}" method="GET" class="flex gap-4">
+    <div class="px-6 pt-6 pb-2">
+        <div class="w-7/12 p-5 bg-gray-200 rounded-lg shadow-lg flex items-center justify-between gap-5">
+            <p class="w-1/2 text-lg font-semibold text-primary uppercase">Filtrar las estadísticas por mes y año:</p>
+            <form action="{{route('parametrizado.index')}}" method="GET" class="w-1/2 flex gap-4">
                 <select name="mes" class="outline-none px-3 py-1 bg-transparent w-1/2 border-2 border-primary appearance-none rounded-lg text-center">
                     <option value="1" class="bg-gray-200">Enero</option>
                     <option value="2" class="bg-gray-200">Febrero</option>
@@ -29,6 +29,30 @@
                     Ver
                 </button>
             </form>
+        </div>
+        <div class="flex py-5 gap-4 text-center mt-[10%]">
+            <div class="bg-gray-200 p-5 w-[33%] rounded-xl shadow-lg">
+                <h1 class="text-primary text-2xl uppercase font-semibold mb-4">productos más vendidos</h1>
+                @foreach ($top_productos as $item)
+                    <div class="flex gap-3 items-center justify-center py-2 text-lg">
+                        <p>{{$item->nombrep}}</p>
+                        <span><img src="{{ asset('iconos/arrow.svg') }}"></span>
+                        <p>{{$item->name}}</p>
+                    </div>
+                @endforeach
+            </div>
+            <div class="bg-gray-200 p-5 w-[33%] rounded-xl shadow-lg">
+                <h1 class="text-primary text-2xl uppercase font-semibold mb-4">clientes que más compran</h1>
+                @foreach ($top_clientes as $item)
+                    <p class="py-2 text-lg">{{$item->name}}</p>
+                @endforeach
+            </div>
+            <div class="bg-gray-200 p-5 w-[33%] rounded-xl shadow-lg">
+                <h1 class="text-primary text-2xl uppercase font-semibold mb-4">mejores vendedores</h1>
+                @foreach ($top_vendedores as $item)
+                    <p class="py-2 text-lg">{{$item->name}}</p>
+                @endforeach
+            </div>
         </div>
     </div>
 @endsection

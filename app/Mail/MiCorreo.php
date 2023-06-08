@@ -14,8 +14,7 @@ class MiCorreo extends Mailable{
         $this->texto = $texto;
     }
     //      //
-    public function build()
-    {
+    public function build(){
     $html = '
             <h1>¡Hola!</h1>
             <p>Este es el contenido de mi correo:</p>

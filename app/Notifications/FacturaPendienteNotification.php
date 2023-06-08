@@ -43,15 +43,15 @@ class FacturaPendienteNotification extends Notification
     public function toMail($notifiable)
     {
         $numeroFactura = $this->numeroFactura; // Obtener el número de factura
-
+        //      //
         return (new MailMessage)
             ->from('laravelproyectoadsi@gmail.com', 'SolTiend')
-            ->subject('Factura Pendiente')
+            ->subject('Pedido Pendiente')
             ->greeting('Hola')
-            ->line('Estimado ' . $notifiable->name)
-            ->line('tienes una factura pendiente.')
-            ->line('Número de factura: ' . $numeroFactura)
-            ->salutation('Saludos');
+            ->line('Estimado '.$notifiable->name.'.')
+            ->line('Te informamos que tienes un pedido pendiente.')
+            ->line( 'Número del pedido: '.$numeroFactura.'.')
+            ->salutation('Saludos.');
             // Resto del contenido del correo
             // ...
     }

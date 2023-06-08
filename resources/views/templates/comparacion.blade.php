@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="px-6 pt-6 pb-2">
-        <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-6 mb-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-6">
             @foreach ($producto as $com)
                 <div class="bg-gray-200 p-6 rounded-lg shadow-xl flex items-center justify-center flex-col">
                     <div class="mb-4">

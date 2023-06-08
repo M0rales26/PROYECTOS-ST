@@ -173,10 +173,7 @@ Route::post('/proveedor/insert', [ProveedorController::class, 'insert'])
     ->middleware('auth')
     ->name('proveedor.insertar');
 //-----------------------------------------------------------//
-Route::get('/recibo', [TblFacturaController::class, 'indexrecibo'])
+Route::get('/estadisticas', [TblFacturaController::class, 'estadisticas'])
     ->middleware('auth')
     ->name('parametrizado.index');
-Route::get('/recibo/parametrizada', [TblFacturaController::class, 'recibo_parametrizado'])
-    ->middleware('auth')
-    ->name('recibo.parametrizado');
 //-----------------------------------------------------------//

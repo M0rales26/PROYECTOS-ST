@@ -13,7 +13,7 @@
                 </a>
             </div>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-6 mb-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-6 place-items-center">
             @foreach ($producto as $prd)
                 <div class="bg-gray-200 p-6 rounded-lg shadow-xl flex items-center justify-center flex-col">
                     <div class="mb-4">
@@ -30,16 +30,16 @@
                         <form action="{{route('proveedor.store')}}" method="POST">
                             @csrf
                             <input type="hidden" name="products_id" id="products_id" value="{{$prd->id_producto}}">
-                            <button type="submit" class="bg-primary text-white px-5 py-1 rounded-lg text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300 w-full font-medium">
+                            <button type="submit" class="bg-primary text-white px-5 py-1 rounded-lg text-sm md:text-xs lg:text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300 w-full font-medium">
                                 <img src="{{ asset('iconos/cart-add.svg') }}" class="nav">  Agregar a Pedido
                             </button>
                         </form>
                         @if ($prd->estado=='HABILITADO')
-                            <a href="{{route('change.status',$prd->id_producto)}}" type="submit" class="bg-false text-white px-5 py-1 rounded-lg text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300 w-full font-medium">
+                            <a href="{{route('change.status',$prd->id_producto)}}" type="submit" class="bg-false text-white px-5 py-1 rounded-lg text-sm md:text-xs lg:text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300 w-full font-medium">
                                 <img src="{{ asset('iconos/change.svg') }}" class="nav"> Deshabilitar
                             </a>
                         @else
-                            <a href="{{route('change.status',$prd->id_producto)}}" type="submit" class="bg-check text-white px-5 py-1 rounded-lg text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300 w-full font-medium">
+                            <a href="{{route('change.status',$prd->id_producto)}}" type="submit" class="bg-check text-white px-5 py-1 rounded-lg text-sm md:text-xs lg:text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300 w-full font-medium">
                                 <img src="{{ asset('iconos/change.svg') }}" class="nav"> Habilitar
                             </a>
                         @endif

@@ -51,9 +51,7 @@ class AdminController extends Controller{
         }
     }
     #endregion
-    //      //
-
-
+    
     #region edit
     public function edit($id){
         $nombre = Tbl_Listado_Nombresp::find($id);
@@ -79,7 +77,6 @@ class AdminController extends Controller{
         return redirect()->route('nombres.index')->with('Actualizado','ok');
     }
     #endregion
-    
 
     #r
     public function indexa(){

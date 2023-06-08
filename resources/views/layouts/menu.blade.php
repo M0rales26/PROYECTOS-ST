@@ -190,6 +190,11 @@
                                     <img src="{{ asset('iconos/bookmarks.svg') }}" class="nav"> Nombres
                                 </li>
                             </a>
+                            <a href="{{route('parametrizado.index')}}">
+                                <li class="mb-4 flex items-center gap-2 px-5 py-1 rounded-lg hover:bg-white hover:scale-105 duration-300">
+                                    <img src="{{ asset('iconos/list.svg') }}" class="nav"> Estadísticas
+                                </li>
+                            </a>
                             <a href="{{route('admins.index')}}">
                                 <li class="mb-4 flex items-center gap-2 px-5 py-1 rounded-lg hover:bg-white hover:scale-105 duration-300">
                                     <img src="{{ asset('iconos/group.svg') }}" class="nav"> Administradores
@@ -202,11 +207,6 @@
                             <a href="{{url('perfil', auth()->user()->id_usuario)}}">
                                 <li class="mb-4 flex items-center gap-2 px-5 py-1 rounded-lg hover:bg-white hover:scale-105 duration-300">
                                     <img src="{{ asset('iconos/user.svg') }}" class="nav"> Perfil
-                                </li>
-                            </a>
-                            <a href="{{route('parametrizado.index')}}">
-                                <li class="mb-4 flex items-center gap-2 px-5 py-1 rounded-lg hover:bg-white hover:scale-105 duration-300">
-                                    <img src="{{ asset('iconos/list.svg') }}" class="nav"> Estadísticas
                                 </li>
                             </a>
                             <a href="{{route('login.destroy')}}">

@@ -264,11 +264,7 @@ class TblFacturaController extends Controller{
     }
 #endregion
 #region recibo parametrizado
-    public function indexrecibo(){
-        return view('templates.admin.parametrizada');
-    }
-    //      //
-    public function recibo_parametrizado(Request $request){
+    public function estadisticas(Request $request){
         $fechaActual = Carbon::now();
         // Obtener el mes de la solicitud o el mes actual si no se proporciona
         $mes = $request->input('mes', $fechaActual->month);
@@ -282,7 +278,7 @@ class TblFacturaController extends Controller{
             ->whereYear('tbl_factura.created_at', $anio) // Filtrar por año (2023)
             ->groupBy('tbl_usuario.id_usuario', 'tbl_usuario.name')
             ->orderByRaw('SUM(tbl_factura_producto.cantidad) DESC')
-            ->take(2)
+            ->take(3)
             ->get();
         $top_productos = DB::table('tbl_factura_producto')
             ->select('tbl_producto.id_producto', 'tbl_producto.nombrep','tbl_usuario.name', DB::raw('SUM(tbl_factura_producto.cantidad) as total_vendido'))
@@ -304,18 +300,14 @@ class TblFacturaController extends Controller{
             ->orderByRaw('SUM(total) DESC')
             ->take(3)
             ->get();
-        if ($top_vendedores->isEmpty() && $top_clientes->isEmpty() && $top_productos->isEmpty()) {
-            $error = 'No se encontraron datos';
-            return view('templates.admin.parametrizada', compact('error'));
-        }else{
-            $pdf = PDF::loadView('templates.pdf.facturap', [
-                'top_vendedores' => $top_vendedores,
-                'top_clientes' => $top_clientes,
-                'top_productos' => $top_productos
-            ]);
-            // Retornar el PDF para verlo en el navegador
-            return $pdf->stream();
-        }
+            //      //
+            //Devolver datos a la vista
+            if($top_vendedores->isEmpty() && $top_clientes->isEmpty() && $top_productos->isEmpty()){
+                $error = 'No se encontraron datos';
+                return view('templates.admin.parametrizada', compact('top_vendedores','top_clientes','top_productos','error'));
+            }else{
+                return view('templates.admin.parametrizada', compact('top_vendedores','top_clientes','top_productos'));
+            }
     }
 #endregion
 }
