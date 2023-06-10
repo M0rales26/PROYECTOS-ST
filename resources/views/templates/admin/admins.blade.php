@@ -10,7 +10,7 @@
                 </a>
             </div>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-6 mb-6">
+        <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-6 mb-6 place-items-center">
             @foreach ($admins as $admin)
                 <div class="bg-gray-200 p-6 rounded-lg shadow-xl w-full sm:w-auto flex items-center justify-center flex-col">
                     <div class="mb-4">

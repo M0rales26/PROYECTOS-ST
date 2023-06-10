@@ -67,6 +67,6 @@ class ProveedorController extends Controller{
             $cantidad_vendida = $cantidad[$i];
             $producto->update(['stock' => $producto->stock + $cantidad_vendida]);
         }
-        return redirect()->back()->with('success', 'La solicitud se registró con éxito!');
+        return redirect()->back()->with('success', 'El pedido se registró con éxito!');
     }
 }

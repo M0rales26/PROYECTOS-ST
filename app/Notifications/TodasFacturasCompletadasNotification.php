@@ -49,7 +49,7 @@ class TodasFacturasCompletadasNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-        ->from('laravelproyectoadsi@gmail.com', 'SolTiend')
+        ->from('soltiendmedellin@gmail.com', 'SolTiend')
         ->subject('Factura Completada')
 		->greeting('Hola')
         ->line('La factura número ' . $this->facturaNumero . ' ha sido completada.')

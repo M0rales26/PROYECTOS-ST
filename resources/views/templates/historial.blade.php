@@ -14,7 +14,7 @@
         </div>
     @else
         <div class="px-6 pt-6 pb-2">
-            <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-6 mb-6 place-items-center">
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-6 place-items-center">
                 @foreach ($facturas as $fact)
                     <div class="bg-gray-200 p-6 rounded-lg shadow-xl w-full h-64 flex items-center justify-between flex-col">
                         <div class="w-full text-center text-xl">
@@ -32,7 +32,7 @@
                         </div>
                         <div class="w-[95%]">
                             <form action="{{route('historial.pdf',['id'=>$fact->id_factura])}}" method="get" class="grid place-items-center">
-                                <button type="submit" class="bg-primary text-white font-semibold px-2 sm:px-5 py-1 rounded-lg text-sm flex items-center justify-center gap-1 sm:gap-2 hover:scale-105 duration-300 w-full">
+                                <button type="submit" class="bg-primary text-white font-semibold px-2 sm:px-5 py-1 rounded-lg text-sm md:text-xs lg:text-sm flex items-center justify-center gap-1 sm:gap-2 hover:scale-105 duration-300 w-full">
                                     <img src="{{ asset('iconos/pdf.svg') }}" class="nav"> Ver Comprobante
                                 </button>
                             </form>

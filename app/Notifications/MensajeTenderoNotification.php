@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
@@ -6,21 +7,21 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class FacturaPendienteNotification extends Notification
+class MensajeTenderoNotification extends Notification
 {
     use Queueable;
-
-    protected $numeroFactura;
+    protected $texto;
+    protected $senderName;
 
     /**
      * Create a new notification instance.
      *
-     * @param  string  $numeroFactura
      * @return void
      */
-    public function __construct($numeroFactura)
+    public function __construct($texto,$senderName)
     {
-        $this->numeroFactura = $numeroFactura;
+        $this->texto = $texto;
+        $this->senderName = $senderName;
     }
 
     /**
@@ -42,15 +43,16 @@ class FacturaPendienteNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $numeroFactura = $this->numeroFactura; // Obtener el número de factura
+        $texto = $this->texto; // Obtener el mensaje
+        $senderName = $this->senderName; // Obtener el nombre del tendero
         //      //
         return (new MailMessage)
             ->from('soltiendmedellin@gmail.com', 'SolTiend')
-            ->subject('Pedido Pendiente')
+            ->subject('Mensaje de Vendedor')
             ->greeting('Hola')
-            ->line('Estimado '.$notifiable->name.'.')
-            ->line('Te informamos que tienes un pedido pendiente.')
-            ->line( 'Número del pedido: '.$numeroFactura.'.')
+            ->line('Estimado administrador.')
+            ->line('El vendedor '.$senderName.' envió un mensaje.')
+            ->line('"'.$texto.'"')
             ->salutation('Saludos.');
     }
 

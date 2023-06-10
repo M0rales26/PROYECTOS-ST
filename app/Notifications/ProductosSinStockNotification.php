@@ -42,20 +42,19 @@ class ProductosSinStockNotification extends Notification
 		* @param mixed $notifiable
 		* @return \Illuminate\Notifications\Messages\MailMessage
 		*/
-	public function toMail($notifiable)
-	{
+	public function toMail($notifiable){
 		// Construye el mensaje de correo electrónico con los productos sin stock
-		$message = "Los siguientes productos se han quedado sin stock:\n\n";
+		$message = "Los siguientes productos se han quedado sin cantidad disponible: \n\n";
 		foreach ($this->productos as $producto) {
-			$message .= "- " . $producto . "\n";
+			$message .=  $producto . " - " . "\n";
 		}
 		return (new MailMessage)
-			->from('laravelproyectoadsi@gmail.com', 'SolTiend')
-			->subject('Productos sin stock')
+			->from('soltiendmedellin@gmail.com', 'SolTiend')
+			->subject('Productos Sin Cantidad Disponible')
 			->greeting('Hola')
-			->line('Estimado vendedor,')
+			->line('Estimado vendedor.')
 			->line($message)
-			->line('Por favor, actualiza el stock de tus productos lo antes posible.')
-			->salutation('Gracias por tu atención.');
+			->line('Por favor, actualiza la cantidad disponible de tus productos lo antes posible.')
+			->salutation('Saludos.');
 	}
 }

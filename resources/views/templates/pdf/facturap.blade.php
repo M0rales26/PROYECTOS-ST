@@ -22,8 +22,5 @@
     @foreach ($top_vendedores as $item)
         <p>{{$item->name}}</p>
     @endforeach
-    <!-- @foreach ($top_clientes as $item)
-        <p>{{$item->cliente_id}}</p>
-    @endforeach -->
 </body>
 </html>
