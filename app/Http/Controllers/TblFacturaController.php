@@ -197,9 +197,9 @@ class TblFacturaController extends Controller{
                 ->where('tendero_id','=',$usuario)
                 ->update(['estado'=>'COMPLETADO']);
             $facturaCompletada = DB::table('tbl_factura_producto')
-            ->where('factura_id', $id)
-            ->where('estado', '!=', 'COMPLETADO')
-            ->doesntExist();
+                ->where('factura_id', $id)
+                ->where('estado', '!=', 'COMPLETADO')
+                ->doesntExist();
             if ($facturaCompletada) {
                 //Todos los registros de la factura están completados
                 event(new \App\Events\FacturasCompletadas($id));
@@ -303,7 +303,7 @@ class TblFacturaController extends Controller{
             //      //
             //Devolver datos a la vista
             if($top_vendedores->isEmpty() && $top_clientes->isEmpty() && $top_productos->isEmpty()){
-                $error = 'No se encontraron datos';
+                $error = 'No se encontraron datos para la fecha solicitada';
                 return view('templates.admin.parametrizada', compact('top_vendedores','top_clientes','top_productos','error'));
             }else{
                 return view('templates.admin.parametrizada', compact('top_vendedores','top_clientes','top_productos'));

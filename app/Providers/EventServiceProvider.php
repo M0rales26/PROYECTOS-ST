@@ -23,13 +23,6 @@ class EventServiceProvider extends ServiceProvider
         FacturasCompletadas::class => [
             EnviarNotificacionFacturasCompletadas::class,
         ],
-
-
-    // ...
-
-
-    
-
     ];
 
     /**

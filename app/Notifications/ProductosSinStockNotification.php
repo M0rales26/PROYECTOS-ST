@@ -49,7 +49,7 @@ class ProductosSinStockNotification extends Notification
 			$message .=  $producto . " - " . "\n";
 		}
 		return (new MailMessage)
-			->from('laravelproyectoadsi@gmail.com', 'SolTiend')
+			->from('soltiendmedellin@gmail.com', 'SolTiend')
 			->subject('Productos Sin Cantidad Disponible')
 			->greeting('Hola')
 			->line('Estimado vendedor.')

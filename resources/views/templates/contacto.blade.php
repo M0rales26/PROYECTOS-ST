@@ -12,8 +12,11 @@
                     @csrf
                     @method('POST')
                     <div class="flex flex-col items-center gap-4 mb-6">
-                        <div class="w-full sm:w-[80%] bg-gray-100 border-2 border-primary flex items-center rounded-xl">
-                            <textarea name="texto" cols="15" rows="10" class="outline-none px-3 py-2 w-full bg-transparent resize-none" autocomplete="off"></textarea>
+                        <div class="w-full sm:w-[85%] bg-gray-100 border-2 border-primary flex items-center rounded-xl">
+                            <input type="text" name="name" value="{{auth()->user()->name}}" class="outline-none px-3 py-2 w-full bg-transparent">
+                        </div>
+                        <div class="w-full sm:w-[85%] bg-gray-100 border-2 border-primary flex items-center rounded-xl">
+                            <textarea name="texto" cols="12" rows="7" class="outline-none px-3 py-2 w-full bg-transparent resize-none placeholder:text-black" placeholder="Mensaje" autocomplete="off"></textarea>
                         </div>
                     </div>
                     <div class="w-full flex items-center justify-center">
