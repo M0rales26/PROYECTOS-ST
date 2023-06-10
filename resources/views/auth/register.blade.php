@@ -1,5 +1,5 @@
 @extends('layouts.applog')
-@section('title', 'Registro')
+@section('title', 'Registro de Usuario')
 
 @section('content')
     <main class="flex items-center justify-center text-center w-full h-screen flex-1">

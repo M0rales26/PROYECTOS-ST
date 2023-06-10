@@ -19,5 +19,7 @@ class Tbl_Factura_Producto extends Model
         'producto_id',
         'factura_id',
         'estado',
+        'updated_at',
+        'created_at',
     ];
 }

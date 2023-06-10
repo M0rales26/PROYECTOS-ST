@@ -12,5 +12,6 @@ class Tbl_Listado_Nombresp extends Model{
 
     protected $fillable = [
         'nombre',
+        'estado',
     ];
 }

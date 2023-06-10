@@ -2,13 +2,15 @@
 @section('title', 'Lista Nombre Productos' )
 
 @section('content')
-    <div class="p-6">
-        <div class="w-full mb-6 flex justify-center">
-            <a href="{{route('admins.create')}}" class="w-full sm:w-96 lg:w-80 bg-primary text-white px-5 py-2 rounded-lg text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300 font-semibold">
-                <img src="{{ asset('iconos/plus.svg') }}" class="nav"> Agregar Administrador
-            </a>
+    <div class="px-6 pt-6 pb-2">
+        <div class="w-full mb-6 flex flex-col sm:flex-row items-center justify-end">
+            <div class="flex items-center gap-4 mr-12">
+                <a href="{{route('admins.create')}}" class="bg-primary text-white px-5 py-2 rounded-lg text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300 font-semibold">
+                    <img src="{{ asset('iconos/plus.svg') }}" class="nav"> Agregar Administrador
+                </a>
+            </div>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-6 mb-6">
+        <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-6 mb-6 place-items-center">
             @foreach ($admins as $admin)
                 <div class="bg-gray-200 p-6 rounded-lg shadow-xl w-full sm:w-auto flex items-center justify-center flex-col">
                     <div class="mb-4">

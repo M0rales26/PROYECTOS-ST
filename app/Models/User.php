@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Notifications\CustomResetPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -24,7 +26,8 @@ class User extends Authenticatable{
         'password',
         'rol_id',
         'fotop',
-        'direccion'
+        'direccion',
+        'remember_token'
     ];
 
     /**
@@ -34,7 +37,6 @@ class User extends Authenticatable{
      */
     protected $hidden = [
         'password',
-        'remember_token',
     ];
 
     /**

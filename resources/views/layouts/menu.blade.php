@@ -17,6 +17,7 @@
                         colors: {
                             primary: '#5556a6',
                             check: '#055329',
+                            false: '#E83838',
                         }
                     }
                 }
@@ -119,7 +120,7 @@
                             </a>
                             <a class="cursor-pointer" onclick="toggleSubMenu()">
                                 <li class="mb-4 flex items-center gap-2 px-5 py-1 rounded-lg hover:bg-white hover:scale-105 duration-300">
-                                    <img src="{{ asset('iconos/file.svg') }}" class="nav"> Facturas
+                                    <img src="{{ asset('iconos/file.svg') }}" class="nav"> Pedidos
                                     <img src="{{ asset('iconos/chevronr.svg') }}" class="ml-8" id="chevron">
                                 </li>
                             </a>
@@ -131,7 +132,7 @@
                                 </a>
                                 <a href="{{route('completado.index')}}">
                                     <li class="mb-4 flex items-center gap-2 px-5 py-1 rounded-lg hover:scale-105 duration-300">
-                                        <img src="{{ asset('iconos/radio.svg') }}" class="nav"> Completadas
+                                        <img src="{{ asset('iconos/radio.svg') }}" class="nav"> Completados
                                     </li>
                                 </a>
                             </div>
@@ -143,7 +144,12 @@
                                 <li class="mb-4 flex items-center gap-2 px-5 py-1 rounded-lg hover:bg-white hover:scale-105 duration-300">
                                     <img src="{{ asset('iconos/user.svg') }}" class="nav"> Perfil
                                 </li>
-                            </button>
+                            </a>
+                            <a href="{{route('contacto.index')}}">
+                                <li class="mb-4 flex items-center gap-2 px-5 py-1 rounded-lg hover:bg-white hover:scale-105 duration-300">
+                                    <img src="{{ asset('iconos/message.svg') }}" class="nav"> Contáctanos
+                                </li>
+                            </a>
                             <a href="{{route('login.destroy')}}">
                                 <li class="flex items-center gap-2 px-5 py-1 rounded-lg hover:bg-white hover:scale-105 duration-300">
                                     <img src="{{ asset('iconos/logout.svg') }}" class="nav"> Cerrar Sesión
@@ -181,7 +187,12 @@
                             </a>
                             <a href="{{route('nombres.index')}}">
                                 <li class="mb-4 flex items-center gap-2 px-5 py-1 rounded-lg hover:bg-white hover:scale-105 duration-300">
-                                    <img src="{{ asset('iconos/list.svg') }}" class="nav"> Productos
+                                    <img src="{{ asset('iconos/bookmarks.svg') }}" class="nav"> Nombres
+                                </li>
+                            </a>
+                            <a href="{{route('parametrizado.index')}}">
+                                <li class="mb-4 flex items-center gap-2 px-5 py-1 rounded-lg hover:bg-white hover:scale-105 duration-300">
+                                    <img src="{{ asset('iconos/list.svg') }}" class="nav"> Estadísticas
                                 </li>
                             </a>
                             <a href="{{route('admins.index')}}">
@@ -197,7 +208,7 @@
                                 <li class="mb-4 flex items-center gap-2 px-5 py-1 rounded-lg hover:bg-white hover:scale-105 duration-300">
                                     <img src="{{ asset('iconos/user.svg') }}" class="nav"> Perfil
                                 </li>
-                            </button>
+                            </a>
                             <a href="{{route('login.destroy')}}">
                                 <li class="flex items-center gap-2 px-5 py-1 rounded-lg hover:bg-white hover:scale-105 duration-300">
                                     <img src="{{ asset('iconos/logout.svg') }}" class="nav"> Cerrar Sesión

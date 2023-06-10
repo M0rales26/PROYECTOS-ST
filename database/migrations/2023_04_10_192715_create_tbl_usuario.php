@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('fotop');
+            $table->rememberToken();
             $table->string('direccion');
             $table->unsignedBigInteger('rol_id');
             $table->timestamps();

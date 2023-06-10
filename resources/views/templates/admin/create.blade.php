@@ -15,6 +15,7 @@
                         <div class="w-full sm:w-[80%] bg-gray-100 border-2 border-primary flex items-center rounded-xl">
                             <img src="{{ asset('iconos/cookie.svg') }}" class="ml-4">
                             <input type="text" name="nombre" class="outline-none px-3 py-2 w-full bg-transparent placeholder:text-black" placeholder="Nombre Producto" value="{{ old('nombre') }}" autocomplete="off">
+                            <input type="hidden" name="estado" value="HABILITADO">
                         </div>
                     </div>
                     {{-- // --}}

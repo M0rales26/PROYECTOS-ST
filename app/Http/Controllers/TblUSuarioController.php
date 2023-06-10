@@ -47,6 +47,10 @@ class TblUSuarioController extends Controller{
             'password_confirmation' => 'required',
         ],$messages);
 
+        if ($request->rol_id == 2 && User::where('rol_id', 2)->where('name', $request->name)->count() > 0) {
+        return redirect()->back()->withErrors(['name' => 'Ya existe un tendero y/o tienda con el mismo nombre ']);
+    }
+
         $datosperfil = request()->except(['password_confirmation','_token']);
         $datosperfil['password'] = bcrypt($request->password);
         if ($imagen = $request->file('fotop')) {

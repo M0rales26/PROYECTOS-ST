@@ -16,7 +16,7 @@ class TblProductoController extends Controller{
     }
     //      //
     public function create(){
-        $nombres = Tbl_Listado_Nombresp::all();
+        $nombres = Tbl_Listado_Nombresp::where('estado','=','HABILITADO')->get();
         return view('templates.producto.create', compact('nombres'));
     }
     //      //

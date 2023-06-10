@@ -2,8 +2,8 @@
 @section('title', 'Perfil de Usuario' )
 
 @section('content')
-    <div class="grid place-items-center w-full h-screen">
-        <div class="flex flex-col items-center justify-center w-10/12 sm:w-4/5 lg:w-3/5 py-8 rounded-xl bg-gray-200 shadow-xl">
+    <div class="grid place-items-center w-full h-screen px-5">
+        <div class="flex flex-col items-center justify-center w-full sm:w-4/5 lg:w-1/2 py-8 rounded-xl bg-gray-200 shadow-xl">
             <div class="flex flex-col sm:flex-row w-full items-center justify-center gap-8 sm:gap-14 mb-8">
                 <div class="border-2 border-primary rounded-full">
                     <img src="{{ url('imguser/' . $datosperfil->fotop)}}" class="rounded-full w-64 h-64">
