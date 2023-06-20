@@ -14,7 +14,7 @@
                         @csrf
                         <input type="hidden" name="products_id" id="products_id" value="{{$item->id_producto}}">
                         <button type="submit" class="bg-primary text-white font-semibold px-5 py-2 rounded-lg text-sm flex items-center justify-center gap-1 sm:gap-2 hover:scale-105 duration-300">
-                            <img src="{{ asset('iconos/trash.svg') }}" class="nav"> Vaciar Pedido
+                            <img src="{{ asset('iconos/trash.svg') }}" class="nav"> Vaciar
                         </button>
                     </form>
                     <form action="{{route('proveedor.insertar')}}" method="POST">
@@ -26,7 +26,7 @@
                             </tr>
                         @endforeach
                         <button type="submit" class="bg-primary text-white px-5 py-2 rounded-lg text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300 font-semibold">
-                            <img src="{{ asset('iconos/checkfull.svg') }}" class="nav"> Confirmar Pedido
+                            <img src="{{ asset('iconos/checkfull.svg') }}" class="nav"> Confirmar
                         </button>
                     </form>
                 </div>

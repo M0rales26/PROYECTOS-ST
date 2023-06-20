@@ -9,7 +9,7 @@
                     <img src="{{ asset('iconos/plus.svg') }}" class="nav"> Agregar Producto
                 </a>
                 <a href="{{route('proveedor.index')}}" class="bg-primary text-white px-5 py-2 rounded-lg text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300 font-semibold">
-                    <img src="{{ asset('iconos/shop.svg') }}" class="nav"> Pedido Proveedor
+                    <img src="{{ asset('iconos/shop.svg') }}" class="nav"> Agregar Cantidad
                 </a>
             </div>
         </div>
@@ -31,7 +31,7 @@
                             @csrf
                             <input type="hidden" name="products_id" id="products_id" value="{{$prd->id_producto}}">
                             <button type="submit" class="bg-primary text-white px-5 py-1 rounded-lg text-sm md:text-xs lg:text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300 w-full font-medium">
-                                <img src="{{ asset('iconos/cart-add.svg') }}" class="nav">  Agregar a Pedido
+                                <img src="{{ asset('iconos/cart-add.svg') }}" class="nav">  Agregar Cantidad
                             </button>
                         </form>
                         @if ($prd->estado=='HABILITADO')
