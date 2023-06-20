@@ -38,8 +38,8 @@
             </div>
             <canvas id="myChart"></canvas>
             <script>
-                const ctx = document.getElementById('myChart').getContext('2d');
-                const myChart = new Chart(ctx, {
+                var ctx = document.getElementById('myChart').getContext('2d');
+                var myChart = new Chart(ctx, {
                     type: 'line',
                     data: {
                         labels: {!! json_encode($fechas) !!},
@@ -53,16 +53,12 @@
                     },
                     options: {
                         scales: {
-                            xAxes: [{
-                                type: 'time',
-                                time: {
-                                    unit: 'day',
-                                    displayFormats: {
-                                        day: 'MMM D'
-                                    }
-                                },
-                                distribution: 'linear'
-                            }]
+                            y: {
+                                ticks: {
+                                    stepSize: 100,
+                                    // Otras opciones de personalización de los ticks en el eje Y, si es necesario
+                                }
+                            }
                         }
                     }
                 });

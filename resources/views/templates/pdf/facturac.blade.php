@@ -32,7 +32,7 @@
                 <tr>
                     <th>N°</th>
                     <th>Nombre Producto</th>
-                    <th>Precio Unitario</th>
+                    <th>Precio</th>
                     <th>Cantidad</th>
                     <th>Total</th>
                     <th>Descripción</th>

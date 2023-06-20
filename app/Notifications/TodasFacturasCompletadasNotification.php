@@ -50,9 +50,9 @@ class TodasFacturasCompletadasNotification extends Notification
     {
         return (new MailMessage)
         ->from('soltiendmedellin@gmail.com', 'SolTiend')
-        ->subject('Factura Completada')
+        ->subject('Pedido Completado')
 		->greeting('Hola')
-        ->line('La factura número ' . $this->facturaNumero . ' ha sido completada.')
+        ->line('El pedido número '.$this->facturaNumero.' ha sido completado y está en proceso de entrega.')
         ->salutation('¡Gracias por usar nuestra aplicación!');
     }
 }

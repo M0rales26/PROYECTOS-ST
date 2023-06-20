@@ -8,25 +8,19 @@ use App\Models\Tbl_Listado_Nombresp;
 use App\Models\User;
 
 class AdminController extends Controller{
-    #region index
+#region nombresProductos
     public function index(Request $request){
         $texto = trim($request->get('texto'));
         $nombres = DB::table('tbl_listado_nombresp')
             ->select('id_nombrep','nombre','estado')
             ->where('nombre','LIKE','%'.$texto.'%')
-            ->paginate(12);
+            ->orderBy('nombre','asc')
+            ->paginate(10);
         return view('templates.admin.prodname', compact('nombres','texto'));
     }
-    #endregion
-    //      //
-
-    #region create
     public function create(){
         return view('templates.admin.create');
     }
-    #endregion
-    //      //
-    #region store
     public function store(Request $request){
         $messages = [
             'nombre' => [
@@ -50,17 +44,10 @@ class AdminController extends Controller{
             return redirect()->route('nombres.index')->with('success', 'El nombre de producto ha sido creado.');
         }
     }
-    #endregion
-    
-    #region edit
     public function edit($id){
         $nombre = Tbl_Listado_Nombresp::find($id);
         return view('templates.admin.edit', compact('nombre'));
     }
-    #endregion
-    //      //
-
-    #region update
     public function update(Request $request, $id){
         $messages = [
             'nombre' => [
@@ -76,9 +63,8 @@ class AdminController extends Controller{
         Tbl_Listado_Nombresp::where('id_nombrep', '=', $id)->update($nombre);
         return redirect()->route('nombres.index')->with('Actualizado','ok');
     }
-    #endregion
-
-    #r
+#endregion
+#region crearAdmins
     public function indexa(){
         $admins = DB::table('tbl_usuario')
             ->select('id_usuario','name','email','fotop')
@@ -137,6 +123,8 @@ class AdminController extends Controller{
         User::create($datosperfil);
         return redirect()->route('admins.index')->with('success', 'El administrador ha sido creado.');
     }
+#endregion
+#region cambiar estado
     //      //
     public function cambiarestado($id){
         $listado = Tbl_Listado_Nombresp::find($id);
@@ -148,4 +136,5 @@ class AdminController extends Controller{
             return redirect()->back();
         }
     }
+#endregion
 }
