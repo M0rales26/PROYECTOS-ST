@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Cart;
 
 class LoginController extends Controller{
@@ -17,12 +18,20 @@ class LoginController extends Controller{
                 'message' => 'El correo o contraseña es incorrecto, por favor intente de nuevo!',
             ]);
         }
-        return redirect()->to('/');
+        $usuario = Auth::user();
+        $rolid = $usuario->rol_id;
+        if ($rolid == 1) {
+            return redirect()->route('shop');
+        } elseif ($rolid == 2) {
+            return redirect()->route('producto.index');
+        } else {
+            return redirect()->route('nombres.index');
+        }
     }
-
+    //      //
     public function destroy(){
         Cart::clear();
         auth()->logout();
-        return redirect()->to('/');
+        return redirect()->to('login');
     }
 }

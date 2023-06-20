@@ -60,7 +60,7 @@ class TblUSuarioController extends Controller{
             $datosperfil['fotop'] = $imagenprod;
         }
         User::create($datosperfil);
-        return redirect()->to('/');
+        return redirect()->to('login');
     }
     //      //
     public function read($id){

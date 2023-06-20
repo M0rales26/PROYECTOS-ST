@@ -9,7 +9,7 @@
                     <img src="{{ asset('iconos/plus.svg') }}" class="nav"> Agregar Producto
                 </a>
                 <a href="{{route('proveedor.index')}}" class="bg-primary text-white px-5 py-2 rounded-lg text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300 font-semibold">
-                    <img src="{{ asset('iconos/shop.svg') }}" class="nav"> Agregar Cantidad
+                    <img src="{{ asset('iconos/shop.svg') }}" class="nav"> Cantidad
                 </a>
             </div>
         </div>

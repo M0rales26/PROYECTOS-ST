@@ -23,9 +23,9 @@ use App\Http\Controllers\ProveedorController;
 |
 */
 
-Route::get('/', function(){return view('templates.home');})
-    ->middleware('auth')
-    ->name('home.index');
+// Route::get('/', function(){return view('templates.home');})
+//     ->middleware('auth')
+//     ->name('home.index');
 //-----------------------------------------------------------//
 Route::get('/login',[LoginController::class, 'create'])
     ->middleware('guest')

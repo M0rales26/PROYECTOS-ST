@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Auth;
 
 class ResetPasswordController extends Controller{
     /*
@@ -57,8 +58,16 @@ class ResetPasswordController extends Controller{
         );
         //      //
         if ($response == Password::PASSWORD_RESET) {
-            return redirect($this->redirectPath())
-            ->with('status', trans($response));
+            $user = Auth::user();
+            $rolid = $user->rol_id;
+            // Redirección basada en el rol_id del usuario
+            if ($rolid == 1) {
+                return redirect()->route('shop');
+            } elseif ($rolid == 2) {
+                return redirect()->route('producto.index');
+            } else {
+                return redirect()->route('nombres.index');
+            }
         } else {
             return back()
             ->withInput($request->only('email'))

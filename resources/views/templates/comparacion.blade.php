@@ -20,12 +20,12 @@
                         <form action="{{route('cart.store')}}" method="POST">
                             @csrf
                             <input type="hidden" name="products_id" id="products_id" value="{{$com->id_producto}}">
-                            <button type="submit" class="bg-primary text-white px-5 py-1 rounded-lg text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300 w-full">
-                                <img src="{{ asset('iconos/carrito2.svg') }}" class="nav">  Agregar
+                            <button type="submit" class="bg-primary text-white px-5 py-1 rounded-lg text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300 w-full font-medium">
+                                <img src="{{ asset('iconos/carrito2.svg') }}" class="nav">  Agregar al carrito
                             </button>
                         </form>
                         <form action="{{route('grafica.producto',$com->id_producto)}}">
-                            <button type="submit" class="bg-false text-white px-5 py-1 rounded-lg text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300 w-full">
+                            <button type="submit" class="bg-false text-white px-5 py-1 rounded-lg text-sm flex items-center justify-center gap-2 hover:scale-105 duration-300 w-full font-medium">
                                 <img src="{{ asset('iconos/chart.svg') }}" class="nav"> Ver Gráfica
                             </button>
                         </form>

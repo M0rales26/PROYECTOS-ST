@@ -33,18 +33,18 @@
             <div class="px-6 pt-8 w-[19rem] sm:w-[24rem] lg:w-64 bg-gray-200 h-full hidden sm:hidden lg:flex flex-col justify-between shadow-xl rounded-lg z-50 transition-all duration-300" id="menu">
                 <div>
                     <div class="mb-8">
-                        <a href="{{route('home.index')}}" class="text-primary font-bold text-3xl flex items-center justify-center gap-2">
+                        <a href="{{route('shop')}}" class="text-primary font-bold text-3xl flex items-center justify-center gap-2">
                             <img src="{{ asset('iconos/logo.svg') }}"> SolTiend
                         </a>
                     </div>
                     {{-- // --}}
                     <h6 class="font-bold mb-4">General</h6>
                     <ul class="border-b-2 border-black mb-8">
-                        <a href="{{route('home.index')}}">
+                        {{-- <a href="{{route('home.index')}}">
                             <li class="mb-4 flex items-center gap-2 px-5 py-1 rounded-lg hover:bg-white hover:scale-105 duration-300">
                                 <img src="{{ asset('iconos/home.svg') }}" class="nav"> Inicio
                             </li>
-                        </a>
+                        </a> --}}
                         <a href="{{route('shop')}}">
                             <li class="mb-4 flex items-center gap-2 px-5 py-1 rounded-lg hover:bg-white hover:scale-105 duration-300">
                                 <img src="{{ asset('iconos/lemon.svg') }}" class="nav"> Productos
@@ -101,18 +101,18 @@
                 <div class="px-6 pt-8 w-[19rem] sm:w-[24rem] lg:w-64 bg-gray-200 h-full hidden sm:hidden lg:flex flex-col justify-between shadow-xl rounded-lg z-50 transition-all duration-300" id="menu">
                     <div>
                         <div class="mb-8">
-                            <a href="{{route('home.index')}}" class="text-primary font-bold text-3xl flex items-center justify-center gap-2">
+                            <a href="{{route('producto.index')}}" class="text-primary font-bold text-3xl flex items-center justify-center gap-2">
                                 <img src="{{ asset('iconos/logo.svg') }}"> SolTiend
                             </a>
                         </div>
                         {{-- // --}}
                         <h6 class="font-bold mb-4">General</h6>
                         <ul class="border-b-2 border-black mb-8">
-                            <a href="{{route('home.index')}}">
+                            {{-- <a href="{{route('home.index')}}">
                                 <li class="mb-4 flex items-center gap-2 px-5 py-1 rounded-lg hover:bg-white hover:scale-105 duration-300">
                                     <img src="{{ asset('iconos/home.svg') }}" class="nav"> Inicio
                                 </li>
-                            </a>
+                            </a> --}}
                             <a href="{{route('producto.index')}}">
                                 <li class="mb-4 flex items-center gap-2 px-5 py-1 rounded-lg hover:bg-white hover:scale-105 duration-300">
                                     <img src="{{ asset('iconos/briefcase.svg') }}" class="nav"> Catálogo
@@ -173,18 +173,18 @@
                 <div class="px-6 pt-8 w-[19rem] sm:w-[24rem] lg:w-64 bg-gray-200 h-full hidden sm:hidden lg:flex flex-col justify-between shadow-xl rounded-lg z-50 transition-all duration-300" id="menu">
                     <div>
                         <div class="mb-8">
-                            <a href="{{route('home.index')}}" class="text-primary font-bold text-3xl flex items-center justify-center gap-2">
+                            <a href="{{route('nombres.index')}}" class="text-primary font-bold text-3xl flex items-center justify-center gap-2">
                                 <img src="{{ asset('iconos/logo.svg') }}"> SolTiend
                             </a>
                         </div>
                         {{-- // --}}
                         <h6 class="font-bold mb-4">General</h6>
                         <ul class="border-b-2 border-black mb-8">
-                            <a href="{{route('home.index')}}">
+                            {{-- <a href="{{route('home.index')}}">
                                 <li class="mb-4 flex items-center gap-2 px-5 py-1 rounded-lg hover:bg-white hover:scale-105 duration-300">
                                     <img src="{{ asset('iconos/home.svg') }}" class="nav"> Inicio
                                 </li>
-                            </a>
+                            </a> --}}
                             <a href="{{route('nombres.index')}}">
                                 <li class="mb-4 flex items-center gap-2 px-5 py-1 rounded-lg hover:bg-white hover:scale-105 duration-300">
                                     <img src="{{ asset('iconos/bookmarks.svg') }}" class="nav"> Nombres
